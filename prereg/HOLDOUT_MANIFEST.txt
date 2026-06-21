@@ -1,0 +1,18 @@
+HOLD-OUT MANIFEST  (Study 1: do personality types exist)
+sealed: 2026-06-20 21:12:31 EDT
+seed: 20260620 | confirm fraction: 0.5
+
+NEO120   total N =  410376  | explore =  205188  | CONFIRM(held-out) =  205188  (exploratory ~4.9% seen)
+IPIP50   total N =  603322  | explore =  301661  | CONFIRM(held-out) =  301661  (exploratory ~3.3% seen)
+HEXACO   total N =   22734  | explore =   11367  | CONFIRM(held-out) =   11367  (exploratory ~88% seen)  *** exploratory pass already touched most of this set; its hold-out is NOT naive -> treat HEXACO as robustness replication, not clean confirmation ***
+
+USE: the confirmatory multiverse loads each .npy and subsets to the rows in
+holdout_confirm_<set>.txt (1-based; subtract 1 for Python). The EXPLORE rows
+(everything else) may be used for any further exploratory work.
+
+PREREG SENTENCE (paste): 'Prior to the confirmatory analysis we partitioned each
+dataset with a fixed seed (20260620) into a 50% exploration set and a 50% held-out
+confirmation set (row indices frozen and timestamped on OSF); all confirmatory
+specifications were run only on the held-out set. Because the exploratory pass had
+already accessed ~20,000-row subsamples drawn before this split, we disclose this
+prior contact; for HEXACO, whose N is small, the hold-out cannot be treated as naive.'

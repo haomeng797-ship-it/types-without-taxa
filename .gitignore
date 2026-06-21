@@ -1,0 +1,15 @@
+# large public data (see data/SOURCES.md) — not redistributed
+*.npy
+data/raw/
+**/conf_*.csv
+
+# derived / intermediate outputs
+*.rds
+out/
+*.log
+
+# os / editor / R
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
