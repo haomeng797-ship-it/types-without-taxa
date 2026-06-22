@@ -46,34 +46,33 @@ must converge; HEXACO is robustness only because its hold-out is not naive."
 
 ## ── CONFIRMATORY VERDICT (held-out data; computed 2026-06-21, AFTER the rule above was locked) ──
 Seed 20260620. Held-out subsamples; 14 covariance models; Gaussian-copula matched null
-(80 replicates per domain slice, 50 per facet slice). CCFI via RTaxometrics
-(MAMBAC + MAXEIG + L-Mode; num.p=20, n.pop=10000). Three results bear on the rule.
+(60 replicates per domain slice, 50 per facet slice). CCFI via RTaxometrics
+(MAMBAC + MAXEIG, the two registered procedures; num.p=20, n.pop=10000). Three results bear on the rule.
 
 VERDICT 1 — real structure beyond Gaussian dependence: **CONFIRMED in every slice.**
 Real ΔBIC exceeded the matched-null 95th percentile in all five:
-  NEO-120 domain 717 vs 485; IPIP-50 domain 1369 vs 913; HEXACO domain 816 vs 213;
+  NEO-120 domain 717 vs 485; IPIP-50 domain 1369 vs 910; HEXACO domain 816 vs 215;
   NEO-120 facet 4013 vs 1073; HEXACO facet 2701 vs 337.
 → Genuine structure beyond skew + linear (Gaussian-copula) dependence. Both primary
   instruments and the robustness instrument.
 
 REVERSE GATE (categorical) — **clearly NOT met → NOT taxonic.**
   • CCFI ≥ .55 replicated: NO. No trait reached .55 in either family (11 traits; max =
-    HEXACO Honesty-Humility .530). NEO mean CCFI .377; HEXACO mean .453.
+    NEO-120 Openness .535). NEO mean CCFI .375; HEXACO mean .430.
   • Clear BIC minimum / stable k: NO. Selected k swings across the 14 covariance models in
     every slice (range 1–10 at facet resolution); BIC keeps improving toward the cap.
 → Pre-specified categorical disconfirmers absent. No separated categories.
 
-VERDICT 2 (continuous) — **NOT cleanly met; lands in the pre-specified middle.**
-  (1) CCFI mean < .45 & no trait ≥ .55, both families: PARTIAL. NEO ✓ (.377). HEXACO gray
-      (.453 > .45; none ≥ .55).
+VERDICT 2 (continuous) — **met for the cleanest instruments; one criterion short elsewhere.**
+  (1) CCFI mean < .45 & no trait ≥ .55, both families: MET. NEO mean .375, HEXACO mean .430,
+      both < .45; highest single trait NEO-120 Openness .535, none ≥ .55.
   (2) confidently classifiable < 50% (max posterior > .8): MET in ALL 5 slices.
       NEO-120 domain 14.6%; NEO-120 facet 48.0%; IPIP-50 domain 25.1%;
       HEXACO domain 30.0%; HEXACO facet 46.0% — all < 50%. In every slice most
       respondents are NOT confidently assignable to any component.
   (3) first-split share of BIC gain > 75%: MET in 4/5.
       NEO-120 domain 88.7%; NEO-120 facet 89.6%; HEXACO domain 82.8%;
-      HEXACO facet 98.9% ✓.  IPIP-50 domain 61.8% ✗ (gain spread across more
-      components — consistent with its criterion-4 over-extraction).
+      HEXACO facet 98.9% ✓.  IPIP-50 domain 61.8% ✗ (BIC gain spread across more components).
   (4) real selected-k distribution indistinguishable from matched null: MET in ALL 5 slices
       on the PRE-REGISTERED statistic (median across the 14 covariance models; matched n,
       60 null reps/domain, 50/facet). Real median-k inside the matched-null median 95% interval
@@ -87,19 +86,19 @@ VERDICT 2 (continuous) — **NOT cleanly met; lands in the pre-specified middle.
 
 FINAL VERDICT (all four criteria computed; criterion 4 on the registered MEDIAN statistic).
 By instrument —
-  • NEO-120 (naive hold-out): satisfies ALL FOUR — (1) CCFI .377, none ≥ .55; (2) 14.6% / 48.0%;
+  • NEO-120 (naive hold-out): satisfies ALL FOUR — (1) CCFI .375, none ≥ .55; (2) 14.6% / 48.0%;
     (3) 88.7% / 89.6%; (4) median k null-like at both resolutions → UNAMBIGUOUS CONTINUOUS.
   • IPIP-50: passes (2) and (4); fails (3) (first split 61.8% < 75%) → continuous, with the BIC
     gain a little less concentrated in the first split. (No CCFI; IPIP-50 has no facets.)
-  • HEXACO (robustness only): passes (2), (3), and (4); gray on (1) (mean CCFI .453, none ≥ .55).
+  • HEXACO (robustness only): passes ALL FOUR — (1) mean CCFI .430 < .45, none ≥ .55; (2), (3), (4) met.
 
 OVERALL: No separated categories in any instrument. The reverse/categorical gate fails decisively
 everywhere (no CCFI ≥ .55; unstable k), and on the pre-registered median statistic the apparent
 number of types is statistically indistinguishable from a typeless matched null in ALL FIVE slices.
 There is mild real structure beyond the Gaussian-copula null (Verdict 1, all slices), but it does
 NOT take the form of extra types or categories: under the robust statistic the count is null-like
-and no trait is taxonic. The residual blemishes are minor and non-categorical — IPIP-50's
-first-split concentration and HEXACO's gray CCFI mean.
+and no trait is taxonic. The one shortfall is IPIP-50's first-split concentration (61.8 percent);
+HEXACO now meets all four.
 
 Calibrated reportable claim: "No taxonic structure was found in any instrument. On the
 pre-registered (median) statistic the number of selected components is indistinguishable from a
