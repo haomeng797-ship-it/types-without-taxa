@@ -10,10 +10,10 @@ it with a matched null: a synthetic population built to share the real data's tr
 and its full correlation structure, but with no latent types by construction. If a typeless null
 produces as many "types" as the real data, the types were never there.
 
-The through-line is methodological. Across fourteen routine covariance assumptions the apparent
-number of types swings from one to ten; against the matched null and a set of preregistered
-criteria, the structure is continuous, not categorical, in every instrument tested. The personality
-question is the demonstration; the reusable contribution is the test.
+The point is methodological. Change one routine setting, the covariance assumption, and the number
+of types found slides from one to ten. Held against the matched null and a set of preregistered
+criteria, none of the three instruments shows separated categories. Personality is just where I try
+the test out. The test is the thing I'd want others to pick up and use.
 
 **Author:** Miura Meng
 
