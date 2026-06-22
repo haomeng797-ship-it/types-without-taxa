@@ -17,8 +17,8 @@ abstract: |
   ten depending only on the covariance assumption; by the preregistered measure it never exceeds what
   the typeless null produces; and no trait shows a categorical signature. Real data does depart a little
   from the null, but not by gaining types or turning categorical. The contribution is not a verdict on
-  personality, already known to be continuous, but the test itself, which any future claim of N types
-  can be held to.
+  personality; trait structure has long been argued to be dimensional. What is new is the test, which any
+  future claim of N types can be held to.
 keywords:
   - personality structure
   - categorical versus continuous
@@ -109,9 +109,9 @@ All of it is aimed at the personality-types question, across three datasets.
 
 The picture that comes back is consistent. Change the covariance assumption and the number of types
 walks from one to ten. Hold the rest fixed and, by the measure I committed to in advance, that number
-is no different from what the typeless null gives. No trait crosses the taxometric line. I do not read
-this as news about personality. I read it as a demonstration of a test, and as a standard the next
-typology can be measured against.
+is no different from what the typeless null gives. No trait crosses the taxometric line. None of that is
+new about personality. What it shows is that the test works, and that the next typology has something to
+answer to.
 
 # Background
 
@@ -195,16 +195,17 @@ real values of that variable laid down in the same rank order. What comes out ha
 exactly, the full covariance to within sampling error (the largest correlation it misses is about
 0.009), Gaussian dependence, and no clustering built in. That is the right null for the question. It
 fixes everything a single-cloud description already carries, so any excess clustering in the real data is
-structure the null could not have. I drew eighty such nulls for each domain dataset and fifty for each
+structure the null could not have. I drew sixty such nulls for each domain dataset and fifty for each
 facet dataset.
 
 ## Taxometric analysis
 For the categorical-versus-continuous question head-on, I hand each trait's facets (six per NEO-120
-trait, four per HEXACO trait) to three taxometric procedures, MAMBAC, MAXEIG, and L-Mode, through
-RTaxometrics [@ruscio_rtax]. The CCFI scores the observed curves against curves simulated from
-explicitly dimensional and explicitly categorical comparison data, returning a number between zero and
-one: below .45 reads dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006]. I
-report each trait's CCFI as the average of the three procedures and keep the spread among them in view.
+trait, four per HEXACO trait) to the two taxometric procedures named in the registration, MAMBAC and
+MAXEIG, through RTaxometrics [@ruscio_rtax]. The CCFI scores the observed curves against curves simulated
+from explicitly dimensional and explicitly categorical comparison data, returning a number between zero
+and one: below .45 reads dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006].
+I report each trait's CCFI as the average of the two and keep the spread between them in view; the L-Mode
+curve, which the routine also returns, agreed throughout.
 The fifty-item set has no facets, so this part covers only the NEO-120 and HEXACO.
 
 ## The pre-registered decision rule
@@ -241,19 +242,20 @@ ten in the NEO-120. The parameterization means nothing about people, it is a con
 the apparent number of types across almost the entire range anyone might report. The drift has a
 direction. The richer ellipsoidal models keep fewer components than the plain spherical and diagonal
 ones, because a flexible covariance can absorb the continuous shape that a rigid one can only chase by
-adding pieces. The count is not a property of the respondents. It is settled before the data are seen,
-by a choice in the model.
+adding pieces. So the count isn't telling you about the respondents. The model settled it before anyone
+looked at the data.
 
 ![The BIC-selected number of mixture components ("types") across fourteen covariance parameterizations, on held-out data (matched sample size). Each point is one parameterization, coloured by covariance family and sorted by selected count. The grey band marks the 95% interval of the matched-null median count; the dashed line is the real median. A real line inside the band means the typical count is indistinguishable from data with no latent types.](../figures/fig1_spec_curve_null_median.png){width=95%}
 
 ## There is real structure, but weak against the data's own shape
 A wandering count does not by itself prove the structure is empty, so I compared each dataset to the
 matched null. In all five slices the real clustering gain beat the null's 95th percentile: 717 against
-485 for the NEO-120 domains, 1,369 against 913 for the fifty-item domains, 816 against 213 for the HEXACO
+485 for the NEO-120 domains, 1,369 against 910 for the fifty-item domains, 816 against 215 for the HEXACO
 domains, and 4,013 against 1,073 and 2,701 against 337 for the two facet sets. Real personality data,
 then, is not just its margins and covariance dressed up; some genuine higher-order structure is there in
-every case. That is a statement about leaving a Gaussian-dependence world behind. It is not yet a
-statement about categories.
+every case. But this mostly certifies that the data are not Gaussian, which was never in doubt; the null
+fixes only the linear part of the dependence, so beating it is a low bar. The two comparisons that follow,
+the count and the taxometric curves, are the ones that carry the argument.
 
 ## The count is no larger than a typeless world's
 The next question is whether that real structure shows up as more types. The null has no types by
@@ -274,12 +276,13 @@ anything, this paper's own argument turned on itself, and a reason to fix the st
 
 ## No trait looks like a category
 The taxometric test points the same way. No trait reached the categorical threshold in either instrument
-(Figure 2): across eleven traits the highest CCFI was HEXACO's Honesty-Humility, at .530. The NEO-120
-facets averaged .377, the HEXACO facets .453. Several traits sat in the ambiguous band, more of them in
-HEXACO, but none crossed into categorical territory. The individual procedures occasionally reached
-higher, which Figure 2 shows rather than hides; the registered figure, the average of the three, did not.
+(Figure 2): across eleven traits the highest was NEO-120 Openness, at .535. The NEO-120 facets averaged
+.375, the HEXACO facets .430, the latter just below the dimensional cutoff. A few traits sat in the
+ambiguous band, the highest NEO-120 Openness (.535) and HEXACO Honesty-Humility (.520), but none crossed
+into categorical territory. One procedure occasionally reached higher, which Figure 2 shows rather than
+hides; the registered figure, the average of the two, did not.
 
-![CCFI by trait. Each point is the mean of the MAMBAC, MAXEIG, and L-Mode procedures; the segment is their range. Values below .45 read dimensional, .45 to .55 ambiguous, above .55 taxonic. No trait reaches the taxonic threshold.](../figures/fig2_ccfi_by_trait.png){width=85%}
+![CCFI by trait. Each point is the mean of the two registered procedures, MAMBAC and MAXEIG; the segment is their range. Values below .45 read dimensional, .45 to .55 ambiguous, above .55 taxonic. No trait's mean reaches the taxonic threshold.](../figures/fig2_ccfi_by_trait.png){width=85%}
 
 ## People do not sort cleanly, and one cut does most of the work
 Two more checks, both registered, lean the same way. Under the selected solution, fewer than half of
@@ -293,9 +296,10 @@ split people, it found them spread along the splits, not gathered on one side.
 ## The verdict
 Held against the rule I set in advance, the categorical signs are missing everywhere: no CCFI at .55 that
 repeats, no clear BIC minimum, no count that holds still. The NEO-120, the dataset with a clean hold-out,
-meets all four continuity conditions. The fifty-item set and HEXACO meet them too, with small and
-non-categorical shortfalls, the fifty-item set's first split a little less dominant and HEXACO's average
-CCFI in the ambiguous band. So I find no evidence for separated types in any of the three. The clusters
+meets all four continuity conditions, and so does HEXACO, whose mean CCFI (.430) sits below the
+dimensional cutoff. The fifty-item set meets three of the four; it misses only the first-split threshold,
+at 61.8 percent against 75, and has no facets to give it a CCFI. None of these is a categorical sign. So I
+find no evidence for separated types in any of the three. The clusters
 they yield are ones the matched null reproduces, and the mild real structure that remains never turns
 into extra types or into categories. HEXACO I keep as a robustness check, since its hold-out is not
 clean.
@@ -355,10 +359,9 @@ procedure.
 The number of types a method reports is not, by itself, a fact about people. For personality, a case
 studied to the point of consensus, I have shown the count drifting across the whole range as one
 inconsequential assumption is changed, staying inside what a typeless null produces, and never showing a
-categorical signature in any trait. None of that is news about personality. The test is the point. It
-makes a given claim of N types fail or survive against a null that means something, and lays bare how much
-the claim depended on choices no one was watching. The materials are public, so the next claim can face
-the same check. Whether a structure is real and whether it is a set of kinds are two questions, and a
+categorical signature in any trait. None of this is news about personality; the point is the test. It can
+make a claim of N types fail against a null that means something, and it shows how much the claim leaned
+on choices nobody was watching. The materials are public, so the next claim can face the same check. Whether a structure is real and whether it is a set of kinds are two questions, and a
 count of clusters answers neither until it is asked against the right null.
 
 # References {.unnumbered}
