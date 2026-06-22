@@ -13,3 +13,6 @@ out/
 .Rhistory
 .RData
 .Rproj.user/
+
+# pandoc render shim (transient, not source)
+paper/paper_render.md

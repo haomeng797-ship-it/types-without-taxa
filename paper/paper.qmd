@@ -164,8 +164,8 @@ covariance model, and the whole rule, with nothing added or dropped once the hol
 
 ## Data
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
-facets: the IPIP-NEO-120 [@johnson2014; 410,376 respondents; five domains, thirty facets]; an IPIP
-fifty-item Big-Five set [@goldberg1999; 603,322; five domains, no facets defined]; and the IPIP-HEXACO
+facets: the IPIP-NEO-120 [@johnson2014] (410,376 respondents; five domains, thirty facets); an IPIP
+fifty-item Big-Five set [@goldberg1999] (603,322; five domains, no facets defined); and the IPIP-HEXACO
 (22,734; six domains, twenty-four facets). Three instruments rather than one, so that a verdict has to
 repeat across measurement systems instead of surviving in a single one.
 
