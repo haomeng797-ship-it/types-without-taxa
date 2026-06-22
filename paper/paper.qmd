@@ -63,10 +63,6 @@ execute:
   echo: false
 ---
 
-<!-- Assembled manuscript. Prose rewritten in a human voice (first person, em-dashes minimized).
-     Numbers match the confirmatory analysis. CITATIONS BELOW ARE FILLED FROM MEMORY AND MUST BE
-     VERIFIED against the originals (years, pages, the Katahira commentary title) before submission. -->
-
 ```{=latex}
 \newpage
 ```

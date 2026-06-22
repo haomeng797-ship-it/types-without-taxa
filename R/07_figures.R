@@ -1,4 +1,4 @@
-# Figures 1 and 2. Reads of-record outputs from out/ ; writes to figures/.
+# Figures 1 and 2: reads the saved model outputs in out/, writes the figures to figures/.
 # Run after 02_real_grid.R, 03_copula_null.R (per slice), 04_ccfi.R, 05_ccfi_extract.R.
 suppressMessages({library(ggplot2); library(dplyr)})
 OUT <- "out"; FIG <- "figures"; dir.create(FIG, showWarnings = FALSE)

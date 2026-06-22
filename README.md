@@ -5,7 +5,7 @@
 
 A preregistered reanalysis, in R, of three large public personality datasets (~1.0M respondents).
 When you run a clustering algorithm on personality data it almost always returns some number of
-"types" — whether or not real types exist. This study asks how to tell the difference, and answers
+"types," whether or not real types exist. This study asks how to tell the difference, and answers
 it with a matched null: a synthetic population built to share the real data's trait distributions
 and its full correlation structure, but with no latent types by construction. If a typeless null
 produces as many "types" as the real data, the types were never there.
@@ -19,7 +19,7 @@ question is the demonstration; the reusable contribution is the test.
 
 ## Read it
 - Preregistration (OSF): https://osf.io/2ekcg
-- Paper: forthcoming. Draft sections in [`paper/`](paper/).
+- Paper: [`paper/paper.pdf`](paper/paper.pdf) (Quarto source `paper.qmd`, also `paper.html`).
 
 ## What's here
 
@@ -27,9 +27,9 @@ question is the demonstration; the reusable contribution is the test.
 |---|---|
 | `R/` | analysis scripts `00`–`07`, run in order |
 | `prereg/` | the preregistered decision rule, specification grid, knowledge-of-data, and the sealed hold-out indices |
-| `figures/` | the two main figures |
-| `paper/` | draft Methods and Results sections |
-| `data/` | `SOURCES.md` — where to obtain the public datasets (the data are not redistributed here) |
+| `figures/` | the figures |
+| `paper/` | the manuscript: Quarto source, plus rendered PDF and HTML |
+| `data/` | `SOURCES.md`, where to obtain the public datasets (the data are not redistributed here) |
 
 ## Method, in one paragraph
 Each dataset is modeled as a Gaussian mixture; "types" are the components selected by BIC across
@@ -62,9 +62,9 @@ adjusting. Seed of record: **20260620**. The exact held-out respondents are list
 ## Data sources
 All public. Each dataset belongs to its providers; cite them as the data source. See
 [`data/SOURCES.md`](data/SOURCES.md).
-- IPIP-NEO-120 (Johnson) — 5 domains, 30 facets
-- IPIP Big-Five 50-item (Open-Source Psychometrics) — 5 domains
-- IPIP-HEXACO — 6 domains, 24 facets
+- IPIP-NEO-120 (Johnson): 5 domains, 30 facets
+- IPIP Big-Five 50-item (Open-Source Psychometrics): 5 domains
+- IPIP-HEXACO: 6 domains, 24 facets
 
 ## Preregistration
 Registered on OSF before the held-out data were analyzed (https://osf.io/2ekcg). The decision rule

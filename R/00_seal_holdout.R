@@ -6,8 +6,8 @@
 SEED      <- 20260620L     # <-- record this exact number in the preregistration
 CONF_FRAC <- 0.50          # fraction held out for confirmation (large N -> generous)
 
-OUT <- "/Users/menghao/Library/Application Support/Claude/local-agent-mode-sessions/3aa1fdd3-f508-4003-af4a-2017e07db0cb/f260600f-e911-4881-9c9e-3e3f72bfd985/local_554904fd-182b-4ded-a87d-21199e51ca7f/outputs"
-DEST <- "/Users/menghao/Downloads/study1_repro/prereg"
+OUT  <- "data/scored"   # directory with the scored .npy arrays (domain_scores.npy, ipip50_scores.npy, hexaco_scores.npy); see data/SOURCES.md
+DEST <- "prereg"        # hold-out manifests are written here
 
 # read only the .npy header to get the row count (no array load)
 npy_nrow <- function(path){
