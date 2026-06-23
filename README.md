@@ -25,7 +25,7 @@ the test out. The test is the thing I'd want others to pick up and use.
 
 | Path | Contents |
 |---|---|
-| `R/` | analysis scripts `00`–`07`, run in order |
+| `R/` | analysis scripts `00`–`08`, run in order |
 | `prereg/` | the preregistered decision rule, specification grid, knowledge-of-data, and the sealed hold-out indices |
 | `figures/` | the figures |
 | `paper/` | the manuscript: Quarto source, plus rendered PDF and HTML |
@@ -53,6 +53,7 @@ Rscript R/03_copula_null.R <slice> <n> <reps>     # matched-null distribution, p
 Rscript R/04_ccfi.R && Rscript R/05_ccfi_extract.R  # taxometric CCFI per trait
 Rscript R/06_criteria.R                           # confident-assignment + first-split shares
 Rscript R/07_figures.R                            # Figures 1 and 2
+Rscript R/08_positive_control.R                   # Figure 3 (positive-control power check; self-contained synthetic data)
 ```
 
 The scripts are research code: paths and slice subsamples reflect the author's setup and may need
