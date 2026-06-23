@@ -1,4 +1,4 @@
-P2<-Sys.getenv("P2"); if(P2=="")P2<-"/Users/menghao/Downloads/study1_repro/phase2"
+P2<-Sys.getenv("P2"); if(P2=="")P2<-"."
 band<-function(c) if(is.na(c))"NA" else if(c<.45)"dimensional" else if(c>.55)"TAXONIC" else "ambiguous"
 traits<-c("NEO_Neuroticism","NEO_Extraversion","NEO_Openness","NEO_Agreeableness","NEO_Conscientiousness",
  "HEX_HonestyHumility","HEX_Emotionality","HEX_eXtraversion","HEX_Agreeableness","HEX_Conscientiousness","HEX_Openness")

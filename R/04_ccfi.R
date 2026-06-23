@@ -1,5 +1,5 @@
 suppressPackageStartupMessages(library(RTaxometrics))
-P2<-Sys.getenv("P2"); if(P2=="")P2<-"/Users/menghao/Downloads/study1_repro/phase2"
+P2<-Sys.getenv("P2"); if(P2=="")P2<-"."
 neo<-as.matrix(read.csv(file.path(P2,"data","conf_NEO120_facet.csv"),header=FALSE))   # 30 facets
 hex<-as.matrix(read.csv(file.path(P2,"data","conf_HEXACO_facet.csv"),header=FALSE))    # 24 facets
 neo_b<-list(NEO_Neuroticism=1:6,NEO_Extraversion=7:12,NEO_Openness=13:18,NEO_Agreeableness=19:24,NEO_Conscientiousness=25:30)

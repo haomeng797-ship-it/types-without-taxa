@@ -2,7 +2,7 @@
 # One row = one runnable analysis ("parallel universe"). The confirmatory engine
 # reads spec_grid.csv and runs every row, recording the selected number of types k.
 
-DEST <- "/Users/menghao/Downloads/study1_repro/prereg"
+DEST <- "prereg"
 
 cov <- c("EII","VII",                         # spherical
          "EEI","VEI","EVI","VVI",             # diagonal

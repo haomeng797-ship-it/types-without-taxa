@@ -1,5 +1,5 @@
 suppressMessages(library(mclust))
-P2<-Sys.getenv("P2"); if(P2=="")P2<-"/Users/menghao/Downloads/study1_repro/phase2"
+P2<-Sys.getenv("P2"); if(P2=="")P2<-"."
 a<-commandArgs(trailingOnly=TRUE); nm<-a[1]; n<-as.integer(a[2]); R<-as.integer(a[3])
 models<-c("EII","VII","EEI","VEI","EVI","VVI","EEE","EVE","VEE","VVE","EEV","VEV","EVV","VVV")
 gen_copula_null<-function(d){ n<-nrow(d); p<-ncol(d)

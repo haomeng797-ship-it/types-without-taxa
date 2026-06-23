@@ -1,5 +1,5 @@
 suppressMessages(library(mclust))
-P2<-Sys.getenv("P2"); if(P2=="")P2<-"/Users/menghao/Downloads/study1_repro/phase2"
+P2<-Sys.getenv("P2"); if(P2=="")P2<-"."
 slices<-list(NEO120_domain=8000,NEO120_facet=5000,IPIP50_domain=8000,HEXACO_domain=8000,HEXACO_facet=5000)
 res<-list()
 for(nm in names(slices)){
