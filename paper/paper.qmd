@@ -4,21 +4,21 @@ subtitle: "A Covariance-Matched-Null Multiverse Test of Categorical versus Conti
 author: "Miura Meng"
 date: today
 abstract: |
-  Run a clustering method on personality data and it will hand you types, whether or not any types are
-  there. That makes a familiar announcement, that a dataset contains some particular number of
-  personality types, hard to take at face value; the number might be a fact about people, or only a
-  fact about the method. This paper offers a way to tell the two apart, and tries it on the personality
-  case. I compare each of three large public datasets (about a million respondents, across the
-  IPIP-NEO-120, an IPIP Big-Five inventory, and the IPIP-HEXACO) to a matched null: a synthetic
-  population built to copy the data's trait distributions and full correlation structure exactly, but
-  to contain no types by construction. That comparison runs across all fourteen covariance assumptions
-  a standard mixture model can make, and a taxometric test adds a second, independent reading.
-  Everything was preregistered and run on held-out data. The number of types found ranges from one to
-  ten depending only on the covariance assumption; by the preregistered measure it never exceeds what
-  the typeless null produces; and no trait shows a categorical signature. Real data does depart a little
-  from the null, but not by gaining types or turning categorical. The contribution is not a verdict on
-  personality; trait structure has long been argued to be dimensional. What is new is the test, which any
-  future claim of N types can be held to.
+  A clustering method applied to personality data will return some number of "types" whether or not
+  real types exist, which makes the familiar announcement that a dataset contains, say, four personality
+  types hard to read: the number may describe people, or only the method. This paper offers a way to
+  separate the two and applies it to the personality case. I compare each of three large public datasets
+  (roughly one million respondents, across the IPIP-NEO-120, an IPIP Big-Five inventory, and the
+  IPIP-HEXACO) against a matched null: a synthetic population built to reproduce the data's trait
+  distributions and full correlation structure exactly while containing no types by construction. The
+  comparison runs across all fourteen covariance parameterizations a standard Gaussian mixture model can
+  take, and a taxometric analysis provides an independent second reading. The full procedure was
+  preregistered and run on held-out data. The number of types selected ranges from one to ten as a
+  function of the covariance assumption alone; by the preregistered statistic it never exceeds what the
+  typeless null produces; and no trait reaches a categorical threshold. The real data depart from the
+  null only in higher-order structure, without acquiring types or turning categorical. Dimensional
+  structure in personality is already well established; the contribution here is the test, a procedure to
+  which any future claim of N types can be held.
 keywords:
   - personality structure
   - categorical versus continuous
@@ -77,13 +77,12 @@ is something you can hold in your head; a position in a five- or six-dimensional
 
 But a clustering method will find types whether or not any are there. Give a mixture model a single
 smooth cloud of data and it still reports two or three or ten groups, because each added group trims
-the fit a little and the selection rule takes the trade. A clean partition is not much of a finding by
-itself. The question worth asking is not how many types a method returned, but whether they do anything
-more than trace the shape the data already had.
+the fit a little and the selection rule takes the trade. A clean partition, on its own, establishes
+little. The question is whether its groups mark anything beyond the shape the data already had.
 
 On personality itself, the argument is largely over. Taxometric and structural studies have looked for
-categories in trait data for years and kept finding gradients instead [@haslam2012; @haslam2020]. I am
-not trying to reopen that. What the settled view still lacks is a way to check a specific claim, this
+categories in trait data for years and kept finding gradients instead [@haslam2012; @haslam2020]. I do
+not aim to reopen that. What the settled view still lacks is a way to check a specific claim, this
 dataset and these respondents and this many types, against a null that means something, and a sense of
 how much the claim depends on choices made before any result is in view.
 
@@ -97,11 +96,11 @@ to say about how many clusters there are, or how that number moves when the mode
 My approach has three parts, and none is new on its own. The null is a Gaussian copula. It keeps every
 trait's distribution and the whole covariance matrix and scrambles only what is left, the higher-order
 dependence, so a cluster counts as real only if it survives a world that already shares the data's
-margins and correlations. This is the constructed null the earlier comment called for. I then refuse to
-report a single number; the same test runs across all fourteen covariance parameterizations of the
-mixture model, and I show the whole spread of answers rather than the one I happen to prefer. And I
-bring in taxometrics as an outside witness, so the verdict does not rest on one method's assumptions.
-All of it is aimed at the personality-types question, across three datasets.
+margins and correlations. This is the constructed null the earlier comment called for. Rather than
+report a single number, I run the same test across all fourteen covariance parameterizations of the
+mixture model and report the full spread of answers in place of any single preferred one. And I bring
+in taxometrics as an independent check, so the verdict does not rest on one method's assumptions. All
+of it is aimed at the personality-types question, across three datasets.
 
 The picture that comes back is consistent. Change the covariance assumption and the number of types
 walks from one to ten. Hold the rest fixed and, by the measure I committed to in advance, that number
@@ -112,18 +111,18 @@ answer to.
 # Background
 
 ## A cluster solution settles nothing on its own
-The wish to sort people into kinds is old, and it keeps coming back in quantitative dress: clinical
-subtypes, learner profiles, data-driven personality types. The trouble is always the same. Clustering
-and mixture methods exist to partition; give them continuous data and they partition it, and a
-selection criterion will almost always prefer more than one piece. So "the data support k clusters"
-quietly mixes a fact about people with a fact about the procedure, and the procedure rarely has to
-answer for itself, to say what a world with no types would have produced under the same treatment.
+Sorting people into kinds recurs in quantitative psychology under one label after another: clinical
+subtypes, learner profiles, market segments, data-driven personality types. The trouble is the same
+each time. Clustering and mixture methods exist to partition; give them continuous data and they
+partition it anyway, and a selection criterion will almost always prefer more than one piece. So "the
+data support k clusters" quietly mixes a fact about people with a fact about the procedure, one that,
+left to itself, never says what a world with no types would have produced under the same treatment.
 
 ## What is already settled
-Whether traits come in classes or in degrees has been asked many times and answered the same way, in
-degrees [@haslam2012; @haslam2020]. Because that much is settled, the thing worth adding is not the
-conclusion but a tool: something that turns a particular cluster-count claim into a claim that can fail,
-and shows how much it leans on choices no one inspects.
+On the substance, the verdict is in: two meta-analyses of the taxometric literature find trait structure
+dimensional, not categorical [@haslam2012; @haslam2020]. What that settled verdict still lacks is a tool,
+one that turns a particular cluster-count claim into something that can fail, and shows how much it leans
+on choices no one inspects.
 
 ## The null is where the argument lives
 An apparent grouping is "real" only against a null that says what real means here. Shuffle every
@@ -179,8 +178,8 @@ I model each dataset as a Gaussian mixture and let "types" mean the components a
 mclust [@scrucca2016] offers fourteen ways to constrain a component's covariance, in volume, shape, and
 orientation, running from the spherical (EII, VII) through the diagonal (EEI, VEI, EVI, VVI) to the
 fully ellipsoidal (EEE through VVV). For each, I fit one to ten components and record the number BIC
-prefers. The fourteen answers, taken together, are the specification curve: how many types you find as a
-function of an assumption that carries no meaning about people.
+prefers. The fourteen answers, taken together, are the specification curve: the number of types found as
+a function of an assumption that carries no meaning about people.
 
 ## The Gaussian-copula matched null
 To ask whether a clustering is more than the data's own margins and covariance, I compare it to a null
@@ -195,7 +194,7 @@ structure the null could not have. I drew sixty such nulls for each domain datas
 facet dataset.
 
 ## Taxometric analysis
-For the categorical-versus-continuous question head-on, I hand each trait's facets (six per NEO-120
+For the categorical-versus-continuous question head-on, I submit each trait's facets (six per NEO-120
 trait, four per HEXACO trait) to the two taxometric procedures named in the registration, MAMBAC and
 MAXEIG, through RTaxometrics [@ruscio_rtax]. The CCFI scores the observed curves against curves simulated
 from explicitly dimensional and explicitly categorical comparison data, returning a number between zero
@@ -231,14 +230,14 @@ Data, code, and the registration are public.
 # Results
 
 ## The covariance assumption sets the count
-Start with the count itself, and it refuses to settle. Across the fourteen covariance models the number
+Start with the count itself: it does not settle. Across the fourteen covariance models the number
 of components BIC keeps runs from one to ten (Figure 1). At the facet level it spans the whole grid in
 both the NEO-120 and HEXACO; even at the domain level it runs from three to ten in HEXACO and five to
 ten in the NEO-120. The parameterization means nothing about people, it is a convenience, yet it moves
 the apparent number of types across almost the entire range anyone might report. The drift has a
 direction. The richer ellipsoidal models keep fewer components than the plain spherical and diagonal
 ones, because a flexible covariance can absorb the continuous shape that a rigid one can only chase by
-adding pieces. So the count isn't telling you about the respondents. The model settled it before anyone
+adding pieces. So the count is not about the respondents. The model settled it before anyone
 looked at the data.
 
 ![The BIC-selected number of mixture components ("types") across fourteen covariance parameterizations, on held-out data (matched sample size). Each point is one parameterization, coloured by covariance family and sorted by selected count. The grey band marks the 95% interval of the matched-null median count; the dashed line is the real median. A real line inside the band means the typical count is indistinguishable from data with no latent types.](../figures/fig1_spec_curve_null_median.png){width=95%}
@@ -248,7 +247,7 @@ A wandering count does not by itself prove the structure is empty, so I compared
 matched null. In all five slices the real clustering gain beat the null's 95th percentile: 717 against
 485 for the NEO-120 domains, 1,369 against 910 for the fifty-item domains, 816 against 215 for the HEXACO
 domains, and 4,013 against 1,073 and 2,701 against 337 for the two facet sets. Real personality data,
-then, is not just its margins and covariance dressed up; some genuine higher-order structure is there in
+then, carries more than its margins and covariance: some genuine higher-order structure is there in
 every case. But this mostly certifies that the data are not Gaussian, which was never in doubt; the null
 fixes only the linear part of the dependence, so beating it is a low bar. The two comparisons that follow,
 the count and the taxometric curves, are the ones that carry the argument.
@@ -267,7 +266,7 @@ The mean tells a slightly different story, and the difference is worth keeping. 
 at the median, the count does exceed the null in the fifty-item and HEXACO sets. The two part ways because
 the per-model counts are skewed: a few covariance models run all the way to the ten-component ceiling, and
 that tail pulls the mean up while leaving the median where it is. I registered the median, and I report
-the mean too. That a verdict can hinge on which summary of the same fourteen numbers you take is, if
+the mean too. That a verdict can hinge on which summary of the same fourteen numbers one takes is, if
 anything, this paper's own argument turned on itself, and a reason to fix the statistic before looking.
 
 ## No trait looks like a category
@@ -296,11 +295,11 @@ share identical marginal distributions and differ only in the orientation of the
 clustering lives in the joint structure and nowhere in the margins. The test caught it: as the signal
 grew the real median count climbed out of the null, from one at no signal to nine at a strong one, while
 the matched null stayed at one throughout. A no-signal version was read, correctly, as typeless. So the
-test is not a machine that only ever returns "continuous"; when separated types are present in the
-dependence it fires, and fires harder the clearer they are.
+test does not only ever return "continuous": when separated types are present in the dependence, it
+detects them, more strongly the clearer they are.
 
 It also has a blind spot worth stating plainly. When I instead built well-separated clusters whose
-separation was large enough to register in the univariate distributions, the test went quiet: the
+separation was large enough to register in the univariate distributions, the test did not flag them: the
 matched null, which copies those distributions exactly, then produced the same clustering on its own.
 That is the cost of holding the margins fixed, and here it is the right cost. A type already visible in
 each variable's histogram is one a continuous distribution with those histograms also produces, so the
@@ -329,23 +328,23 @@ across all fourteen covariance models; and a taxometric index gave a second read
 datasets the count ran from one to ten on the covariance assumption alone, sat inside the typeless null
 by the registered measure in every case, and never reached the taxometric line for a category.
 
-I take this as a result about method, not about people. That traits are continuous is old news
-[@haslam2012; @haslam2020]; I am not adding to that case so much as handing it an instrument, one that
-makes the standing claim "this dataset has N types" something that can be checked, and shows the number
-at its heart to be set by a choice that means nothing.
+I take this as a result about method, not about people. That trait structure is dimensional is already
+established [@haslam2012; @haslam2020]; I am less adding to that case than supplying an instrument, one
+that makes the standing claim "this dataset has N types" something that can be checked, and shows the
+number at its heart to be set by a choice that means nothing.
 
 The claim is meant to be narrow. The null tests one thing, whether the clustering beats the linear
 dependence already in the data, and on that test the real data does carry structure the null cannot
 make; every dataset cleared the bar. But that leftover structure does not become more types, and it does
 not become taxonic curves. So the honest line is "no evidence for separated types," not "perfectly
 continuous." Something real is there, in every dataset, below the level of a category, and I do not try
-to name it here. Skew, a little nonlinearity, some unevenness in density: any of these would do, and none
+to name it here. Skew, mild nonlinearity, some unevenness in density: any of these would do, and none
 is a kind of person.
 
 One thing in my own analysis makes the point better than I could. Whether the count beats the null
-depends on whether you read it at the mean or the median, because a few models run to the ceiling and
+depends on whether it is read at the mean or the median, because a few models run to the ceiling and
 skew the average. I registered the median; the mean says otherwise; I report both. A verdict that turns
-on which summary you pick is exactly the trouble this paper is about, and a reason to name the statistic
+on which summary is chosen is exactly the trouble this paper is about, and a reason to name the statistic
 before the data are in front of you.
 
 The test is not about personality in particular. Any claim that continuous measurements fall into so
