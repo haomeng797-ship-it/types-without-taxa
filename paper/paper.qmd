@@ -33,7 +33,9 @@ format:
     pdf-engine: xelatex
     documentclass: article
     fontsize: 12pt
-    mainfont: "Times New Roman"
+    mainfont: "EB Garamond"
+    mainfontoptions:
+      - Scale=1.06
     linestretch: 2
     geometry:
       - margin=1in
@@ -50,6 +52,14 @@ format:
         \fancyhead[R]{\thepage}
         \renewcommand{\headrulewidth}{0pt}
         \fancypagestyle{plain}{\fancyhf{}\fancyhead[R]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+        % ---- footnotes: looser leading, more air above, cleaner separator ----
+        \usepackage{setspace}
+        \setlength{\skip\footins}{26pt plus 4pt minus 2pt}
+        \setlength{\footnotesep}{13pt}
+        \renewcommand{\footnoterule}{\vspace*{4pt}\noindent\rule{2.4in}{0.3pt}\vspace*{7pt}}
+        \makeatletter
+        \long\def\@makefntext#1{\setlength{\parindent}{1em}\noindent\hb@xt@1.8em{\hss\@makefnmark\,}\setstretch{1.25}\small #1}
+        \makeatother
   html:
     theme: cosmo
     toc: true
@@ -80,11 +90,16 @@ smooth cloud of data and it still reports two or three or ten groups, because ea
 the fit a little and the selection rule takes the trade. A clean partition, on its own, establishes
 little. The question is whether its groups mark anything beyond the shape the data already had.
 
-On personality itself, the argument is largely over. Taxometric and structural studies have looked for
-categories in trait data for years and kept finding gradients instead [@haslam2012; @haslam2020]. I do
+On personality itself, the argument is largely over. Taxometric[^taxa] and structural studies have looked
+for categories in trait data for years and kept finding gradients instead [@haslam2012; @haslam2020]. I do
 not aim to reopen that. What the settled view still lacks is a way to check a specific claim, this
 dataset and these respondents and this many types, against a null that means something, and a sense of
 how much the claim depends on choices made before any result is in view.
+
+[^taxa]: A *taxon* (plural *taxa*; from Greek *táxis*, "arrangement") is the term of art in taxometrics
+[@meehl1995; @ruscio2006] for a genuine latent category, a discrete kind of person as opposed to a
+position on a continuum. The title's contrast is between *types* that a clustering method reports as
+output and *taxa* that would have to exist in the population for those types to refer to anything real.
 
 Past attempts to impose that discipline fall short in ways worth naming. The best-known typology study
 tested its clusters against data with all the associations shuffled out [@gerlach2018], but data with
@@ -128,11 +143,16 @@ on choices no one inspects.
 An apparent grouping is "real" only against a null that says what real means here. Shuffle every
 association out of the data [@gerlach2018] and you have set the bar on the floor; the correlations alone
 will clear it. @katahira2020 saw this but stopped at the diagnosis. The cure is borrowed from elsewhere,
-from the surrogate-data and matched-null traditions of nonlinear time series, network neuroscience, and
-ecology, where you fix everything innocent about a dataset and randomize only the thing in question. For
-a claim about clusters the copula null is the natural choice: keep the margins, keep the covariance, and
-let only higher-order dependence vary, so any extra clustering has to come from structure the null
-cannot hold.
+from the surrogate-data and matched-null traditions[^surrogate] of nonlinear time series, network
+neuroscience, and ecology, where you fix everything innocent about a dataset and randomize only the thing
+in question. For a claim about clusters the copula null is the natural choice: keep the margins, keep the
+covariance, and let only higher-order dependence vary, so any extra clustering has to come from structure
+the null cannot hold.
+
+[^surrogate]: The surrogate-data method comes from nonlinear time-series analysis [@theiler1992;
+@schreiber2000]: fix the innocent features of a signal, here the margins and the linear covariance,
+randomize only the feature under test, and ask whether the real statistic exceeds its surrogate
+distribution. The Gaussian-copula null carries that logic to a mixture-model count.
 
 ## A second opinion
 Taxometrics reaches the same question by a different road, asking whether the covariation among a
@@ -152,10 +172,11 @@ would have landed.
 
 # Method
 
-## Transparency
-Everything below was fixed in advance. Before I opened the held-out data I registered the decision rule
-and the specification grid (OSF, seed 20260620), and what follows reports every dataset, every
-covariance model, and the whole rule, with nothing added or dropped once the hold-out was in view.
+## Design and transparency
+Everything that could push the result toward "types" or "no types" was fixed before I saw the test data.
+Before opening the held-out data I registered the decision rule and the specification grid (OSF, seed
+20260620), and what follows reports every dataset, every covariance model, and the whole rule, with
+nothing added or dropped once the hold-out was in view.
 
 ## Data
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
@@ -174,54 +195,121 @@ matters later: mixtures tend to select more components as the sample grows, so I
 data and its null at the same sample size.
 
 ## The covariance multiverse
-I model each dataset as a Gaussian mixture and let "types" mean the components a BIC selection keeps.
-mclust [@scrucca2016] offers fourteen ways to constrain a component's covariance, in volume, shape, and
-orientation, running from the spherical (EII, VII) through the diagonal (EEI, VEI, EVI, VVI) to the
-fully ellipsoidal (EEE through VVV). For each, I fit one to ten components and record the number BIC
+A mixture model asks how many components best describe a cloud of points, and the answer turns on a
+setting most studies fix without comment: the shape the components are allowed to take. I model each
+dataset as a Gaussian mixture and let "types" mean the components a BIC selection keeps. mclust
+[@scrucca2016] offers fourteen ways to constrain a component's covariance, in volume, shape, and
+orientation, running from the spherical (EII, VII) through the diagonal (EEI, VEI, EVI, VVI) to the fully
+ellipsoidal (EEE through VVV).[^mclust] For each, I fit one to ten components and record the number BIC
 prefers. The fourteen answers, taken together, are the specification curve: the number of types found as
 a function of an assumption that carries no meaning about people.
 
+[^mclust]: The three-letter codes name how each component's covariance is held in volume, shape, and
+orientation: E for equal across components, V for varying, I for the identity (a spherical or
+axis-aligned shape). EII is equal-volume spherical; VVV lets volume, shape, and orientation all vary
+freely [@scrucca2016].
+
 ## The Gaussian-copula matched null
-To ask whether a clustering is more than the data's own margins and covariance, I compare it to a null
-that holds both fixed and frees only the rest. From a real $n \times p$ subsample I take the correlation
-matrix and its Cholesky factor, draw a matrix of independent standard-normal numbers, correlate them
-through that factor, and then, column by column, replace each correlated normal variable with the sorted
-real values of that variable laid down in the same rank order. What comes out has every marginal
-exactly, the full covariance to within sampling error (the largest correlation it misses is about
-0.009), Gaussian dependence, and no clustering built in. That is the right null for the question. It
-fixes everything a single-cloud description already carries, so any excess clustering in the real data is
-structure the null could not have. I drew sixty such nulls for each domain dataset and fifty for each
-facet dataset.
+To tell a real clustering from one that any dataset of this shape would show, I compare it against a
+Gaussian-copula null:[^copula] a twin of the data with the same margins and the same correlations, but no
+types built in. The null holds those two things fixed and frees the rest, replacing all higher-order
+dependence with plain Gaussian dependence, so by construction it contains no latent types.
+
+[^copula]: The term *copula* (Latin *copula*, "tie, link," the root of English *couple*) is borrowed in
+statistics from Sklar [-@sklar1959], where it denotes the function that ties a set of one-variable
+marginals into a joint distribution, separately from the marginals themselves. Any multivariate
+distribution decomposes uniquely into its marginals and a copula; the *Gaussian* copula is the one whose
+dependence is fixed entirely by a correlation matrix, with no further joint structure.
+
+A useful way to picture this null is as a three-story building. The ground floor holds the marginals,
+each variable's histogram; the second floor holds the pairwise correlations; and everything from the
+third floor up holds the higher-order dependence, where any latent types would live, since groups within
+a dataset show up as conditional dependencies beyond the linear correlation. The copula null rebuilds the
+ground floor and the second floor exactly as in the real data and leaves every floor above empty: once
+the correlation matrix is fixed, its Gaussian dependence adds no further joint structure. If clustering
+finds as many components in a building whose upper floors are empty as it does in the real data, those
+components were never on the upper floors of the real data either; they were the shape of the lower two
+all along.
+
+The construction is a single rank transformation:
+
+> **Algorithm 1. Gaussian-copula matched null.**
+>
+> *Input:* a real $n \times p$ subsample $\mathbf{X}$.
+>
+> 1. Take the correlation matrix $\mathbf{C} = \operatorname{cor}(\mathbf{X})$ and its Cholesky factor
+>    $\mathbf{L}$ (adding a $10^{-6}$ ridge to the diagonal if $\mathbf{C}$ is not positive definite).
+> 2. Draw $\mathbf{Z}$, an $n \times p$ matrix of independent standard-normal values, and set
+>    $\mathbf{Y} = \mathbf{Z}\mathbf{L}$, so that $\mathbf{Y}$ carries the same correlations as
+>    $\mathbf{X}$.
+> 3. For each variable $j$, replace column $j$ of $\mathbf{Y}$ with the sorted real values of $X_{j}$,
+>    laid down in the rank order of $Y_{j}$.
+>
+> *Output:* $\mathbf{X}^{\ast}$, whose every marginal matches $\mathbf{X}$ exactly, whose covariance
+> matches to within sampling error (the largest correlation it misses is about 0.009), whose dependence
+> is Gaussian, and which has no clustering built in.
+
+In plain terms, the null is a synthetic dataset whose every histogram and every correlation match the
+real one but which is guaranteed to contain no real groups; if it produces as many types as the real
+data, the types were the shape of the data, not a feature of the people. I drew sixty such nulls for each
+domain dataset and fifty for each facet dataset, each at the matched sample size, and ran the full
+fourteen-model specification curve on every one.
+
+## The matched-null tests
+Two quantities are read against the null distribution. The first asks whether the data carry any
+structure beyond their margins and correlations: $\Delta$BIC, the BIC of the best of the fourteen models
+minus the one-component BIC,[^dbic] is required to exceed the 95th percentile of the null's $\Delta$BIC
+(call this H1). The second is the registered test of how many types there are: the real median count
+across the fourteen models is required to fall inside the null's 95 percent interval for the count to be
+judged no larger than a typeless population's (H3). H1 is a low bar, certifying only that the data are
+not Gaussian, and serves as a precondition; H3 is the test that bears on types.
+
+[^dbic]: By the conventional reading a $\Delta$BIC above 10 is very strong evidence for the
+better-fitting model [@raftery1995]. The test here does not lean on that convention: it compares the real
+$\Delta$BIC to the null's own distribution rather than to a fixed cutoff.
 
 ## Taxometric analysis
-For the categorical-versus-continuous question head-on, I submit each trait's facets (six per NEO-120
-trait, four per HEXACO trait) to the two taxometric procedures named in the registration, MAMBAC and
-MAXEIG, through RTaxometrics [@ruscio_rtax]. The CCFI scores the observed curves against curves simulated
-from explicitly dimensional and explicitly categorical comparison data, returning a number between zero
-and one: below .45 reads dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006].
-I report each trait's CCFI as the average of the two and keep the spread between them in view; the L-Mode
-curve, which the routine also returns, agreed throughout.
-The fifty-item set has no facets, so this part covers only the NEO-120 and HEXACO.
+As a second opinion that does not rest on a mixture model's assumptions, I submit each trait's facets
+(six per NEO-120 trait, four per HEXACO trait) to the two taxometric procedures named in the
+registration, MAMBAC and MAXEIG,[^taxoproc] through RTaxometrics [@ruscio_rtax]. The Comparison Curve Fit
+Index (CCFI) scores the observed curves against curves simulated from explicitly dimensional and
+explicitly categorical comparison data, returning a number between zero and one: below .45 reads
+dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006]. I report each trait's
+CCFI as the average of the two registered procedures and keep the spread between them in view; the L-Mode
+curve, which the routine also returns, is reported as a supplementary read. The fifty-item set has no
+facets, so this part covers only the NEO-120 and HEXACO.
+
+[^taxoproc]: MAMBAC (Mean Above Minus Below A Cut) slides a cut along one indicator and plots the mean
+difference on another; MAXEIG (Maximum Eigenvalue) tracks the largest eigenvalue of the indicators across
+ordered subsamples. A genuine category bows these curves into a characteristic peak, while continuous
+data leave them flat [@ruscio2006].
+
+## Positive-control simulations
+A null finding means nothing unless the test can detect types when they are genuinely present, so I ran
+the whole procedure on synthetic data with known structure, in two regimes (five variables, 4,000 cases,
+forty nulls per setting). In the dependence regime, two components share identical standard-normal
+margins on every variable and differ only in the sign of their within-pair correlations, so the type
+signal lives entirely in the joint structure and nothing leaks into the histograms; the within-component
+correlation ranges over 0, .30, .50, .70, and .85. In the separation regime, components differ in their
+means, so the separation does enter the histograms; the centroid separation ranges from 0 to 3 standard
+deviations. For each setting I ran the specification curve on the synthetic data and on forty copula
+nulls of it, and counted a detection when the real median count exceeds the null's 97.5th percentile.
 
 ## The pre-registered decision rule
-The rule was set before the hold-out opened; the full text is in the registration. In short: I credit an
-instrument with real structure only if its clustering gain, the BIC improvement of the best mixture over
-a single component, beats the 95th percentile of the matched null's. I call the structure continuous only
-if four things hold together: mean within-trait CCFI under .45 with no trait at .55 or above, in both
-instrument families; fewer than half of respondents confidently placed in any one component, at a
-posterior above .8; the first split, from one component to two, carrying more than three-quarters of the
-total BIC gain; and the spread of selected counts across the fourteen models indistinguishable from the
-null's, with the real median inside the null's 95 percent interval. The opposite verdict, real types,
-needs the opposite signs: a CCFI at .55 or above that repeats across instruments, a clear BIC minimum
-with gaps between component centers, most respondents confidently placed, and a count that holds steady
-across datasets. The NEO-120 and the fifty-item set are the confirmatory pair and have to agree; HEXACO
-is robustness only.
+The rule was set before the hold-out opened; the full text is in the registration. An instrument is
+credited with real structure only if it clears H1. I then call its structure continuous only if four
+things hold together: mean within-trait CCFI under .45 with no trait at .55 or above, in both instrument
+families; fewer than half of respondents confidently placed in any one component, at a posterior above
+.8; the first split, from one component to two, carrying more than three-quarters of the total BIC gain;
+and the median-count test H3. The opposite verdict, real types, needs the opposite signs: a CCFI at .55
+or above that repeats across instruments, a clear BIC minimum with gaps between component centers, most
+respondents confidently placed, and a count that holds steady across datasets. The NEO-120 and the
+fifty-item set are the confirmatory pair and have to agree; HEXACO is robustness only.
 
-For the record, the statistics are these. $\Delta$BIC is the best-of-fourteen BIC minus the
-one-component BIC; the count summarized across models is the median of the fourteen; the first-split
-share is the two-component gain over the total gain, both measured on the best-of-fourteen envelope; and
-the confident-assignment share is the fraction of respondents whose top posterior exceeds .8 under the
-selected solution.
+For the record, the remaining statistics are these. The count summarized across models is the median of
+the fourteen; the first-split share is the two-component gain over the total gain, both measured on the
+best-of-fourteen envelope; and the confident-assignment share is the fraction of respondents whose top
+posterior exceeds .8 under the selected solution.
 
 ## Software
 R [@rcoreteam], with mclust for the mixtures and RTaxometrics for the CCFI; seed 20260620 throughout.
@@ -245,7 +333,7 @@ looked at the data.
 ## There is real structure, but weak against the data's own shape
 A wandering count does not by itself prove the structure is empty, so I compared each dataset to the
 matched null. In all five slices the real clustering gain beat the null's 95th percentile: 717 against
-485 for the NEO-120 domains, 1,369 against 910 for the fifty-item domains, 816 against 215 for the HEXACO
+485 for the NEO-120 domains, 1,369 against 913 for the fifty-item domains, 816 against 213 for the HEXACO
 domains, and 4,013 against 1,073 and 2,701 against 337 for the two facet sets. Real personality data,
 then, carries more than its margins and covariance: some genuine higher-order structure is there in
 every case. But this mostly certifies that the data are not Gaussian, which was never in doubt; the null

@@ -13,9 +13,9 @@
 # Note: compute-heavy (mclust fit across 14 models x (1 real + R nulls) x grid points).
 
 suppressMessages({library(mclust); library(ggplot2)})
-FIG <- "figures"; dir.create(FIG, showWarnings = FALSE)
+FIG <- "figures"; FONT <- Sys.getenv("FIG_FONT", "sans"); dir.create(FIG, showWarnings = FALSE)
 models <- c("EII","VII","EEI","VEI","EVI","VVI","EEE","EVE","VEE","VVE","EEV","VEV","EVV","VVV")
-SEED <- 20260620L; n <- 4000L; R <- 100L; p <- 5L
+SEED <- 20260620L; n <- 4000L; R <- as.integer(Sys.getenv("FIG_R", "40")); p <- 5L
 
 # median selected k across the 14 covariance models (same statistic as the main analysis)
 fit_med <- function(x){
@@ -68,6 +68,7 @@ B <- do.call(rbind, lapply(delta_grid, function(D){
   cbind(panel = "B. well-separated types (separation enters margins)", signal = D, run_point(X)) }))
 df <- rbind(A, B)
 df$status <- ifelse(df$fired, "detected (real > null)", "null-like")
+saveRDS(df, file.path(FIG, "fig3_data.rds"))  # cache: re-plot (font/labels) without re-running the sim
 
 p3 <- ggplot(df, aes(signal, real)) +
   geom_ribbon(aes(ymin = lo, ymax = hi), fill = "#9aa0a6", alpha = .30) +
@@ -77,12 +78,11 @@ p3 <- ggplot(df, aes(signal, real)) +
   scale_color_manual(values = c("null-like" = "#9aa0a6", "detected (real > null)" = "#D1495B"), name = NULL) +
   scale_y_continuous(breaks = c(1, 2, 4, 6, 8, 10), limits = c(.5, 10.5)) +
   labs(title = "Positive controls: when the test fires, and when it stays quiet",
-       subtitle = paste("Synthetic data with known types. Grey band = matched-null median-k 95% interval; points = real median-k, red where it exceeds the null.",
-                        "A: types living only in the dependence are detected, monotonically. B: types separated enough to enter the margins are reproduced by the null (test is conservative).",
-                        sep = "\n"),
+       subtitle = "Synthetic data with known types. Grey: matched-null 95% interval; red: real median-k exceeds it.",
        x = "type-signal strength  (A: within-component correlation;  B: centroid separation in SD)",
        y = "selected number of types  (median k)") +
-  theme_minimal(base_size = 12) +
-  theme(legend.position = "top", panel.grid.minor = element_blank(), strip.text = element_text(face = "bold"))
-ggsave(file.path(FIG, "fig3_positive_control.png"), p3, width = 9, height = 4.6, dpi = 140)
+  theme_minimal(base_size = 12, base_family = FONT) +
+  theme(legend.position = "top", panel.grid.minor = element_blank(), strip.text = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9.5, color = "grey25"))
+ggsave(file.path(FIG, "fig3_positive_control.png"), p3, width = 9, height = 4.6, dpi = 140, device = ragg::agg_png)
 cat("wrote figures/fig3_positive_control.png\n")
