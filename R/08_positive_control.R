@@ -12,10 +12,11 @@
 # Writes figures/fig3_positive_control.png. Seed of record: 20260620.
 # Note: compute-heavy (mclust fit across 14 models x (1 real + R nulls) x grid points).
 
+Sys.setenv(OPENBLAS_NUM_THREADS = "1", OMP_NUM_THREADS = "1", VECLIB_MAXIMUM_THREADS = "1")  # one BLAS thread per worker so the parallel fork below does not oversubscribe the cores
 suppressMessages({library(mclust); library(ggplot2)})
 FIG <- "figures"; FONT <- Sys.getenv("FIG_FONT", "sans"); dir.create(FIG, showWarnings = FALSE)
 models <- c("EII","VII","EEI","VEI","EVI","VVI","EEE","EVE","VEE","VVE","EEV","VEV","EVV","VVV")
-SEED <- 20260620L; n <- 4000L; R <- as.integer(Sys.getenv("FIG_R", "40")); p <- 5L
+SEED <- 20260620L; n <- 4000L; R <- as.integer(Sys.getenv("FIG_R", "40")); p <- 5L; NC <- max(1L, parallel::detectCores() - 1L)
 
 # median selected k across the 14 covariance models (same statistic as the main analysis)
 fit_med <- function(x){
@@ -60,15 +61,22 @@ run_point <- function(X){
 rho_grid   <- c(0, 0.3, 0.5, 0.7, 0.85)   # panel A: within-component correlation
 delta_grid <- c(0, 1, 1.5, 2, 3)          # panel B: centroid separation, in SD
 
-A <- do.call(rbind, lapply(rho_grid, function(rho){
-  set.seed(SEED); X <- gen_dep(n, p, rho)
-  cbind(panel = "A. dependence-structure types (margins identical)", signal = rho, run_point(X)) }))
-B <- do.call(rbind, lapply(delta_grid, function(D){
-  set.seed(SEED); X <- gen_types(n, p, 2L, D)
-  cbind(panel = "B. well-separated types (separation enters margins)", signal = D, run_point(X)) }))
-df <- rbind(A, B)
-df$status <- ifelse(df$fired, "detected (real > null)", "null-like")
-saveRDS(df, file.path(FIG, "fig3_data.rds"))  # cache: re-plot (font/labels) without re-running the sim
+CACHE <- file.path(FIG, "fig3_data.rds")
+if (file.exists(CACHE)) {
+  df <- readRDS(CACHE)   # cache hit: re-plot (font/labels) in seconds, no simulation. Delete the file to force a fresh run.
+} else {
+  # cold run: the heavy part. To cap math-library threads (which otherwise oversubscribe the fork),
+  # set them on the COMMAND LINE, e.g.  OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 Rscript R/08_positive_control.R
+  A <- do.call(rbind, parallel::mclapply(rho_grid, function(rho){
+    set.seed(SEED); X <- gen_dep(n, p, rho)
+    cbind(panel = "A. dependence-structure types (margins identical)", signal = rho, run_point(X)) }, mc.cores = NC))
+  B <- do.call(rbind, parallel::mclapply(delta_grid, function(D){
+    set.seed(SEED); X <- gen_types(n, p, 2L, D)
+    cbind(panel = "B. well-separated types (separation enters margins)", signal = D, run_point(X)) }, mc.cores = NC))
+  df <- rbind(A, B)
+  df$status <- ifelse(df$fired, "detected (real > null)", "null-like")
+  saveRDS(df, CACHE)
+}
 
 p3 <- ggplot(df, aes(signal, real)) +
   geom_ribbon(aes(ymin = lo, ymax = hi), fill = "#9aa0a6", alpha = .30) +
