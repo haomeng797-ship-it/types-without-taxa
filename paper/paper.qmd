@@ -178,7 +178,7 @@ would have landed.
 
 ## Design and transparency
 Everything that could push the result toward "types" or "no types" was fixed before I saw the test data.
-Before opening the held-out data I registered the decision rule and the specification grid (OSF, seed
+Before opening the held-out data I registered the decision rule and the specification grid (OSF preregistration osf.io/2ekcg; analysis seed
 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with
 nothing added or dropped once the hold-out was in view.
 
@@ -275,7 +275,7 @@ $\Delta$BIC to the null's own distribution rather than to a fixed cutoff.
 ## Taxometric analysis
 As a second opinion that does not rest on a mixture model's assumptions, I submit each trait's facets
 (six per NEO-120 trait, four per HEXACO trait) to the two taxometric procedures named in the
-registration, MAMBAC and MAXEIG,[^taxoproc] through RTaxometrics [@ruscio_rtax]. The Comparison Curve Fit
+registration, MAMBAC and MAXEIG,[^taxoproc] through RTaxometrics [@ruscio_rtax]. These procedures require several indicators of one construct, so a single domain score cannot be used on its own and the facets supply the indicators trait by trait. The Comparison Curve Fit
 Index (CCFI) scores the observed curves against curves simulated from explicitly dimensional and
 explicitly categorical comparison data, returning a number between zero and one: below .45 reads
 dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006]. I report each trait's
@@ -325,7 +325,7 @@ Data, code, and the registration are public.
 
 A study that reports "four personality types" is reporting a number, and that number reflects both the data and the analyst's modeling choices. Before introducing any null, I asked how much it owes to each: holding the data fixed and varying only the covariance parameterization of the mixture model, how far does the selected count move?
 
-It moves across most of the available range. I fit each dataset under all fourteen of mclust's covariance parameterizations and recorded the number of components BIC selected in each (Figure 1). The fourteen counts did not converge in any of the five analyses. The selected number ran from two to ten in the NEO-120 domains and across the full grid, one to ten, in its thirty facets, with comparable spreads in the remaining datasets. A single modeling choice that encodes no claim about respondents thus shifts the reported count across nearly the entire range a study might report.
+It moves across most of the available range. I fit each dataset under all fourteen of mclust's covariance parameterizations and recorded the number of components BIC selected in each (Figure 1; the full per-parameterization counts are in Table S1). The fourteen counts did not converge in any of the five analyses. The selected number ran from two to ten in the NEO-120 domains and across the full grid, one to ten, in its thirty facets, with comparable spreads in the remaining datasets. A single modeling choice that encodes no claim about respondents thus shifts the reported count across nearly the entire range a study might report.
 
 The spread is also patterned by covariance family (Figure 1). The spherical and diagonal parameterizations, which constrain components to simple shapes, generally selected at or near the ten-component ceiling; the fully ellipsoidal parameterizations, which permit each component an arbitrary shape, selected far fewer, in several cases one or two. A flexible component covariance can accommodate the continuous, correlated shape of a real data cloud within a single component, whereas a constrained one approximates that shape by adding components. The selected count therefore reflects the covariance assumption more than any property of the respondents, and that assumption is fixed before the data are examined.
 

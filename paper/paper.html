@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Miura Meng">
-<meta name="dcterms.date" content="2026-06-26">
+<meta name="dcterms.date" content="2026-07-01">
 <meta name="keywords" content="personality structure, categorical versus continuous, mixture models, matched null, taxometrics, multiverse analysis, preregistration">
 
 <title>Types Without Taxa</title>
@@ -2369,7 +2369,7 @@ window.Quarto = {
   <li><a href="#supplementary-material" id="toc-supplementary-material" class="nav-link" data-scroll-target="#supplementary-material">Supplementary material</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -2395,7 +2395,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 26, 2026</p>
+      <p class="date">July 1, 2026</p>
     </div>
   </div>
   
@@ -2455,7 +2455,7 @@ window.Quarto = {
 <h1 data-number="3"><span class="header-section-number">3</span> Method</h1>
 <section id="design-and-transparency" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="design-and-transparency"><span class="header-section-number">3.1</span> Design and transparency</h2>
-<p>Everything that could push the result toward “types” or “no types” was fixed before I saw the test data. Before opening the held-out data I registered the decision rule and the specification grid (OSF, seed 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with nothing added or dropped once the hold-out was in view.</p>
+<p>Everything that could push the result toward “types” or “no types” was fixed before I saw the test data. Before opening the held-out data I registered the decision rule and the specification grid (OSF preregistration osf.io/2ekcg; analysis seed 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with nothing added or dropped once the hold-out was in view.</p>
 </section>
 <section id="data" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="data"><span class="header-section-number">3.2</span> Data</h2>
@@ -2489,7 +2489,7 @@ window.Quarto = {
 </section>
 <section id="taxometric-analysis" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="taxometric-analysis"><span class="header-section-number">3.6</span> Taxometric analysis</h2>
-<p>As a second opinion that does not rest on a mixture model’s assumptions, I submit each trait’s facets (six per NEO-120 trait, four per HEXACO trait) to the two taxometric procedures named in the registration, MAMBAC and MAXEIG,<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> through RTaxometrics <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio 2023</a>)</span>. The Comparison Curve Fit Index (CCFI) scores the observed curves against curves simulated from explicitly dimensional and explicitly categorical comparison data, returning a number between zero and one: below .45 reads dimensional, above .55 categorical, with an ambiguous band between <span class="citation" data-cites="ruscio2006">(<a href="#ref-ruscio2006" role="doc-biblioref">Ruscio et al. 2006</a>)</span>. I report each trait’s CCFI as the average of the two registered procedures and keep the spread between them in view; the L-Mode curve, which the routine also returns, is reported as a supplementary read. The fifty-item set has no facets, so this part covers only the NEO-120 and HEXACO.</p>
+<p>As a second opinion that does not rest on a mixture model’s assumptions, I submit each trait’s facets (six per NEO-120 trait, four per HEXACO trait) to the two taxometric procedures named in the registration, MAMBAC and MAXEIG,<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> through RTaxometrics <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio 2023</a>)</span>. These procedures require several indicators of one construct, so a single domain score cannot be used on its own and the facets supply the indicators trait by trait. The Comparison Curve Fit Index (CCFI) scores the observed curves against curves simulated from explicitly dimensional and explicitly categorical comparison data, returning a number between zero and one: below .45 reads dimensional, above .55 categorical, with an ambiguous band between <span class="citation" data-cites="ruscio2006">(<a href="#ref-ruscio2006" role="doc-biblioref">Ruscio et al. 2006</a>)</span>. I report each trait’s CCFI as the average of the two registered procedures and keep the spread between them in view; the L-Mode curve, which the routine also returns, is reported as a supplementary read. The fifty-item set has no facets, so this part covers only the NEO-120 and HEXACO.</p>
 </section>
 <section id="positive-control-simulations" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="positive-control-simulations"><span class="header-section-number">3.7</span> Positive-control simulations</h2>
@@ -2510,7 +2510,7 @@ window.Quarto = {
 <section id="what-the-reported-count-depends-on" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="what-the-reported-count-depends-on"><span class="header-section-number">4.1</span> What the reported count depends on</h2>
 <p>A study that reports “four personality types” is reporting a number, and that number reflects both the data and the analyst’s modeling choices. Before introducing any null, I asked how much it owes to each: holding the data fixed and varying only the covariance parameterization of the mixture model, how far does the selected count move?</p>
-<p>It moves across most of the available range. I fit each dataset under all fourteen of mclust’s covariance parameterizations and recorded the number of components BIC selected in each (Figure 1). The fourteen counts did not converge in any of the five analyses. The selected number ran from two to ten in the NEO-120 domains and across the full grid, one to ten, in its thirty facets, with comparable spreads in the remaining datasets. A single modeling choice that encodes no claim about respondents thus shifts the reported count across nearly the entire range a study might report.</p>
+<p>It moves across most of the available range. I fit each dataset under all fourteen of mclust’s covariance parameterizations and recorded the number of components BIC selected in each (Figure 1; the full per-parameterization counts are in Table S1). The fourteen counts did not converge in any of the five analyses. The selected number ran from two to ten in the NEO-120 domains and across the full grid, one to ten, in its thirty facets, with comparable spreads in the remaining datasets. A single modeling choice that encodes no claim about respondents thus shifts the reported count across nearly the entire range a study might report.</p>
 <p>The spread is also patterned by covariance family (Figure 1). The spherical and diagonal parameterizations, which constrain components to simple shapes, generally selected at or near the ten-component ceiling; the fully ellipsoidal parameterizations, which permit each component an arbitrary shape, selected far fewer, in several cases one or two. A flexible component covariance can accommodate the continuous, correlated shape of a real data cloud within a single component, whereas a constrained one approximates that shape by adding components. The selected count therefore reflects the covariance assumption more than any property of the respondents, and that assumption is fixed before the data are examined.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
