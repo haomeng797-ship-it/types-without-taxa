@@ -56,8 +56,8 @@ p2 <- ggplot(d2, aes(mean, trait, color=inst)) +
   scale_y_discrete(labels=setNames(d2$lab, as.character(d2$trait))) +
   scale_color_manual(values=c("NEO-120"="#185FA5","HEXACO"="#EF9F27"), guide="none") +
   scale_x_continuous(limits=c(.15,.66), breaks=c(.2,.3,.45,.55)) +
-  labs(title="No trait reaches the taxonic threshold",
-       subtitle="Point = mean of the two registered procedures (MAMBAC, MAXEIG); segment = their range.\nThresholds: below .45 dimensional, .45-.55 ambiguous, above .55 taxonic.",
+  labs(title="No trait reaches the categorical threshold",
+       subtitle="Point = mean of the two registered procedures (MAMBAC, MAXEIG); segment = their range.\nThresholds: below .45 dimensional, .45-.55 ambiguous, above .55 categorical.",
        x="Comparison Curve Fit Index (CCFI)", y=NULL) +
   theme_minimal(base_size=12, base_family=FONT) +
   theme(panel.grid.major.y=element_blank(), strip.text.y=element_text(angle=0, face="bold"),

@@ -133,7 +133,7 @@ answer to.
 Sorting people into kinds recurs in quantitative psychology under one label after another: clinical
 subtypes, learner profiles, market segments, data-driven personality types. The trouble is the same
 each time. Clustering and mixture methods exist to partition; give them continuous data and they
-partition it anyway, and a selection criterion will almost always prefer more than one piece. So "the
+partition it anyway, and a selection criterion will almost always prefer more than one piece. That mixture models in particular over-extract components when continuous data depart from normality is well established [@bauer2003]. So "the
 data support k clusters" quietly mixes a fact about people with a fact about the procedure, one that,
 left to itself, never says what a world with no types would have produced under the same treatment.
 
@@ -176,11 +176,13 @@ would have landed.
 
 # Method
 
-## Design and transparency
+## Transparency and openness
 Everything that could push the result toward "types" or "no types" was fixed before I saw the test data.
 Before opening the held-out data I registered the decision rule and the specification grid (OSF preregistration osf.io/2ekcg; analysis seed
 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with
-nothing added or dropped once the hold-out was in view.
+nothing added or dropped once the hold-out was in view. The three datasets are public and anonymized,
+and their sources are documented in the project repository alongside the complete analysis code; the
+study is a secondary analysis of these data and involved no new data collection.
 
 ## Data
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
