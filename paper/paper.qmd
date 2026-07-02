@@ -181,7 +181,7 @@ Before opening the held-out data I registered the decision rule and the specific
 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with
 nothing added or dropped once the hold-out was in view. The three datasets are public and anonymized,
 and their sources are documented in the project repository alongside the complete analysis code; the
-study is a secondary analysis of these data and involved no new data collection. I report how the analysis subsamples were determined, all data exclusions, and all measures, and I follow the Journal Article Reporting Standards.
+study is a secondary analysis of these data and involved no new data collection. I report how the analysis subsamples were determined, all data exclusions, and all measures, and I follow the Journal Article Reporting Standards. Generative AI was used to assist in drafting and editing the text. The author takes full responsibility for all content and conclusions.
 
 ## Data
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
