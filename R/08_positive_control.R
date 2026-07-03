@@ -85,12 +85,9 @@ p3 <- ggplot(df, aes(signal, real)) +
   facet_wrap(~panel, scales = "free_x") +
   scale_color_manual(values = c("null-like" = "#9aa0a6", "detected (real > null)" = "#D1495B"), name = NULL) +
   scale_y_continuous(breaks = c(1, 2, 4, 6, 8, 10), limits = c(.5, 10.5)) +
-  labs(title = "Positive controls: when the test fires, and when it stays quiet",
-       subtitle = "Synthetic data with known types. Grey: matched-null 95% interval; red: real median-k exceeds it.",
-       x = "type-signal strength  (A: within-component correlation;  B: centroid separation in SD)",
+  labs(x = "type-signal strength  (A: within-component correlation;  B: centroid separation in SD)",
        y = "selected number of types  (median k)") +
   theme_minimal(base_size = 12, base_family = FONT) +
-  theme(legend.position = "top", panel.grid.minor = element_blank(), strip.text = element_text(face = "bold"),
-        plot.subtitle = element_text(size = 9.5, color = "grey25"))
+  theme(legend.position = "top", panel.grid.minor = element_blank(), strip.text = element_text(face = "bold"))
 ggsave(file.path(FIG, "fig3_positive_control.png"), p3, width = 9, height = 4.6, dpi = 140, device = ragg::agg_png)
 cat("wrote figures/fig3_positive_control.png\n")

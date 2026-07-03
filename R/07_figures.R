@@ -26,12 +26,11 @@ df$family  <- factor(df$family,  levels=c("spherical","diagonal","ellipsoidal"))
 p1 <- ggplot(df, aes(x, k)) +
   geom_rect(data=band, inherit.aes=FALSE, aes(xmin=-Inf, xmax=Inf, ymin=lo, ymax=hi), fill="#9aa0a6", alpha=.30) +
   geom_hline(data=band, inherit.aes=FALSE, aes(yintercept=realmed), linetype="dashed", color="#333333", linewidth=.45) +
-  geom_step(aes(group=slice), color="grey55", linewidth=.35) + geom_point(aes(color=family), size=2.5) +
+  geom_step(aes(group=slice), color="grey55", linewidth=.35) + geom_point(aes(color=family, shape=family), size=2.5) +
   geom_text(data=band, inherit.aes=FALSE, aes(x=.7, y=10.6, label=anno), hjust=0, size=2.9, color="#222222") +
-  facet_wrap(~slice, ncol=2) + scale_color_manual(values=cols) +
+  facet_wrap(~slice, ncol=2) + scale_color_manual(values=cols) + scale_shape_manual(values=c(16,17,15)) +
   scale_y_continuous(breaks=c(1,2,4,6,8,10), limits=c(.5,11)) + scale_x_continuous(breaks=NULL) +
-  labs(title="The typical number of 'types' matches a typeless null (pre-registered median statistic)",
-       x="14 covariance specifications, sorted by selected k", y="selected number of types  (k)", color=NULL) +
+  labs(x="14 covariance specifications, sorted by selected k", y="selected number of types  (k)", color=NULL, shape=NULL) +
   theme_minimal(base_size=12, base_family=FONT) +
   theme(legend.position="top", panel.grid.minor=element_blank(), strip.text=element_text(face="bold"))
 ggsave(file.path(FIG, "fig1_spec_curve_null_median.png"), p1, width=9, height=10.5, dpi=140, device=ragg::agg_png)
@@ -56,11 +55,8 @@ p2 <- ggplot(d2, aes(mean, trait, color=inst)) +
   scale_y_discrete(labels=setNames(d2$lab, as.character(d2$trait))) +
   scale_color_manual(values=c("NEO-120"="#185FA5","HEXACO"="#EF9F27"), guide="none") +
   scale_x_continuous(limits=c(.15,.66), breaks=c(.2,.3,.45,.55)) +
-  labs(title="No trait reaches the categorical threshold",
-       subtitle="Point = mean of the two registered procedures (MAMBAC, MAXEIG); segment = their range.\nThresholds: below .45 dimensional, .45-.55 ambiguous, above .55 categorical.",
-       x="Comparison Curve Fit Index (CCFI)", y=NULL) +
+  labs(x="Comparison Curve Fit Index (CCFI)", y=NULL) +
   theme_minimal(base_size=12, base_family=FONT) +
-  theme(panel.grid.major.y=element_blank(), strip.text.y=element_text(angle=0, face="bold"),
-        plot.subtitle=element_text(size=9.5, color="grey25"))
+  theme(panel.grid.major.y=element_blank(), strip.text.y=element_text(angle=0, face="bold"))
 ggsave(file.path(FIG, "fig2_ccfi_by_trait.png"), p2, width=8.6, height=5.6, dpi=140, device=ragg::agg_png)
 cat("wrote figures/fig1_spec_curve_null_median.png and figures/fig2_ccfi_by_trait.png\n")

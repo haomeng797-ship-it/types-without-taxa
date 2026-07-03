@@ -111,7 +111,7 @@ building the alternative it asked for [@katahira2020]. Taxometrics asks the cate
 question head-on [@meehl1995; @ruscio2006], but it works from a fixed set of indicators and has nothing
 to say about how many clusters there are, or how that number moves when the model changes.
 
-My approach has three parts, and none is new on its own. The null is a Gaussian copula. It keeps every
+My approach has three parts, each drawn from an established literature; what is new is the null they are assembled around and the question that assembly makes testable. The null is a Gaussian copula. It keeps every
 trait's distribution and the whole covariance matrix and scrambles only what is left, the higher-order
 dependence, so a cluster counts as real only if it survives a world that already shares the data's
 margins and correlations. This is the constructed null the earlier comment called for. Rather than
@@ -138,14 +138,23 @@ left to itself, never says what a world with no types would have produced under 
 
 ## What is already settled
 On the substance, the verdict is in: two meta-analyses of the taxometric literature find trait structure
-dimensional, not categorical [@haslam2012; @haslam2020]. What that settled verdict still lacks is a tool,
+dimensional, not categorical [@haslam2012; @haslam2020]. A parallel person-centered tradition has
+repeatedly recovered three replicable prototypes, the resilient, overcontrolled, and undercontrolled
+types [@robins1996; @asendorpf2001], and their standing has been contested on exactly the ground at
+issue here: what a recovered cluster establishes about the population. What that settled verdict still lacks is a tool,
 one that turns a particular cluster-count claim into something that can fail, and shows how much it leans
 on choices no one inspects.
 
 ## The null is where the argument lives
 An apparent grouping is "real" only against a null that says what real means here. Shuffle every
 association out of the data [@gerlach2018] and you have set the bar on the floor; the correlations alone
-will clear it. @katahira2020 saw this but stopped at the diagnosis. The cure is borrowed from elsewhere,
+will clear it. @katahira2020 saw this but stopped at the diagnosis. Nor do the standard referees for a cluster count
+answer it. The gap statistic compares the observed clustering to a reference with no dependence at all,
+a uniform distribution over a box [@tibshirani2001], which correlated data clear as easily as the
+shuffled null above; the bootstrap likelihood-ratio test [@mclachlan1987] asks whether $k+1$ components
+fit better than $k$ within a chosen family, not whether the data's own margins and covariance already
+produce the clustering; and methods that merge components after fitting [@hennig2010] repair a solution
+rather than test one. The cure is borrowed from elsewhere,
 from the surrogate-data and matched-null traditions[^surrogate] of nonlinear time series, network
 neuroscience, and ecology, where you fix everything innocent about a dataset and randomize only the thing
 in question. For a claim about clusters the copula null is the natural choice: keep the margins, keep the
@@ -187,7 +196,8 @@ study is a secondary analysis of these data and involved no new data collection.
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
 facets: the IPIP-NEO-120 [@johnson2014] (410,376 respondents; five domains, thirty facets); an IPIP
 fifty-item Big-Five set [@goldberg1999] (603,322; five domains, no facets defined); and the IPIP-HEXACO
-(22,734; six domains, twenty-four facets). Three instruments rather than one, so that a verdict has to
+(22,734; six domains, twenty-four facets), an item-pool implementation of the HEXACO model [@lee2004].
+Three instruments rather than one, so that a verdict has to
 repeat across measurement systems instead of surviving in a single one.
 
 I split each dataset in half (seed 20260620) into an exploratory and a confirmatory part, and sealed the
@@ -206,7 +216,9 @@ dataset as a Gaussian mixture and let "types" mean the components a BIC selectio
 [@scrucca2016] offers fourteen ways to constrain a component's covariance, in volume, shape, and
 orientation, running from the spherical (EII, VII) through the diagonal (EEI, VEI, EVI, VVI) to the fully
 ellipsoidal (EEE through VVV).[^mclust] For each, I fit one to ten components and record the number BIC
-prefers. The fourteen answers, taken together, are the specification curve: the number of types found as
+prefers. The registered grid also carries ICL as an alternative selection criterion; because ICL adds an
+entropy penalty that favors well-separated solutions, it bears on types directly, and its arm is
+reported in the supplement (Table S4). The fourteen answers, taken together, are the specification curve: the number of types found as
 a function of an assumption that carries no meaning about people.
 
 [^mclust]: The three-letter codes name how each component's covariance is held in volume, shape, and
@@ -254,11 +266,19 @@ The construction is a single rank transformation:
 > matches to within sampling error (the largest correlation it misses is about 0.009), whose dependence
 > is Gaussian, and which has no clustering built in.
 
+Step 3 is the rank reordering of @iman1982; it matches the normal-scores rank correlation exactly, so
+the Pearson covariance is reproduced only up to sampling error, which the 0.009 figure above verifies
+directly.
+
 In plain terms, the null is a synthetic dataset whose every histogram and every correlation match the
 real one but which is guaranteed to contain no real groups; if it produces as many types as the real
 data, the types were the shape of the data, not a feature of the people. I drew sixty such nulls for each
 domain dataset and fifty for each facet dataset, each at the matched sample size, and ran the full
-fourteen-model specification curve on every one.
+fourteen-model specification curve on every one. The registration specified 1,000 null replicates; the
+cost of the fourteen-model grid per replicate made that impractical, and the counts above are a reported
+deviation. The resulting Monte Carlo error is modest: bootstrap standard errors for the null interval
+endpoints run from 0.03 to 0.55 components, and no verdict in Table 1 changes when an endpoint is moved
+by twice its standard error.
 
 ## The matched-null tests
 Two quantities are read against the null distribution. The first asks whether the data carry any
@@ -267,7 +287,10 @@ minus the one-component BIC,[^dbic] is required to exceed the 95th percentile of
 (call this H1). The second is the registered test of how many types there are: the real median count
 across the fourteen models is required to fall inside the null's 95 percent interval for the count to be
 judged no larger than a typeless population's (H3). H1 is a low bar, certifying only that the data are
-not Gaussian, and serves as a precondition; H3 is the test that bears on types.
+not Gaussian, and serves as a precondition; H3 is the test that bears on types. The registration also
+defines H2, a composite verdict that the structure is continuous, requiring four criteria to hold
+jointly; it is evaluated under the pre-registered decision rule below, so the labels here follow the
+registration.
 
 [^dbic]: By the conventional reading a $\Delta$BIC above 10 is very strong evidence for the
 better-fitting model [@raftery1995]. The test here does not lean on that convention: it compares the real
@@ -282,7 +305,9 @@ explicitly categorical comparison data, returning a number between zero and one:
 dimensional, above .55 categorical, with an ambiguous band between [@ruscio2006]. I report each trait's
 CCFI as the average of the two registered procedures and keep the spread between them in view; the L-Mode
 curve, which the routine also returns, is reported as a supplementary read. The fifty-item set has no
-facets, so this part covers only the NEO-120 and HEXACO.
+facets, so this part covers only the NEO-120 and HEXACO; item-level indicators were not substituted,
+since single Likert items are too coarse and unreliable to serve as taxometric indicators and the
+registration specified facet composites.
 
 [^taxoproc]: MAMBAC (Mean Above Minus Below A Cut) slides a cut along one indicator and plots the mean
 difference on another; MAXEIG (Maximum Eigenvalue) tracks the largest eigenvalue of the indicators across
@@ -314,7 +339,9 @@ fifty-item set are the confirmatory pair and have to agree; HEXACO is robustness
 For the record, the remaining statistics are these. The count summarized across models is the median of
 the fourteen; the first-split share is the two-component gain over the total gain, both measured on the
 best-of-fourteen envelope; and the confident-assignment share is the fraction of respondents whose top
-posterior exceeds .8 under the selected solution.
+posterior exceeds .8 under the selected solution. The thresholds themselves (.8, one-half,
+three-quarters) are conventions fixed at registration rather than derived quantities; Table 2 reports
+the underlying proportions, so any alternative threshold can be applied directly.
 
 ## Software
 R [@rcoreteam], with mclust for the mixtures and RTaxometrics for the CCFI; seed 20260620 throughout.
@@ -328,9 +355,9 @@ A study that reports "four personality types" is reporting a number, and that nu
 
 It moves across most of the available range. I fit each dataset under all fourteen of mclust's covariance parameterizations and recorded the number of components BIC selected in each (Figure 1; the full per-parameterization counts are in Table S1). The fourteen counts did not converge in any of the five analyses. The selected number ran from two to ten in the NEO-120 domains and across the full grid, one to ten, in its thirty facets, with comparable spreads in the remaining datasets. A single modeling choice that encodes no claim about respondents thus shifts the reported count across nearly the entire range a study might report.
 
-The spread is also patterned by covariance family (Figure 1). The spherical and diagonal parameterizations, which constrain components to simple shapes, generally selected at or near the ten-component ceiling; the fully ellipsoidal parameterizations, which permit each component an arbitrary shape, selected far fewer, in several cases one or two. A flexible component covariance can accommodate the continuous, correlated shape of a real data cloud within a single component, whereas a constrained one approximates that shape by adding components. The selected count therefore reflects the covariance assumption more than any property of the respondents, and that assumption is fixed before the data are examined.
+The spread is also patterned by covariance family (Figure 1). The spherical and diagonal parameterizations, which constrain components to simple shapes, generally selected at or near the ten-component ceiling; the fully ellipsoidal parameterizations, which permit each component an arbitrary shape, selected far fewer, in several cases one or two. A flexible component covariance can accommodate the continuous, correlated shape of a real data cloud within a single component, whereas a constrained one approximates that shape by adding components. The selected count therefore reflects the covariance assumption more than any property of the respondents, and that assumption is fixed before the data are examined. Because the grid fits one to ten components, the spherical and diagonal counts are censored at ten and read as lower bounds; the same registered ceiling applies to the null, so the comparison is like for like.
 
-![The BIC-selected number of mixture components ("types") across the fourteen covariance parameterizations, on held-out data at the matched sample size. Each point is one parameterization, coloured by covariance family and sorted by selected count. The grey band marks the 95% interval of the matched-null median count; the dashed line is the real median. A real median inside the band indicates a typical count indistinguishable from data with no latent types.](../figures/fig1_spec_curve_null_median.png){width=95%}
+![The BIC-selected number of mixture components ("types") across the fourteen covariance parameterizations, on held-out data at the matched sample size. Each point is one parameterization, colored and shaped by covariance family and sorted by selected count. The grey band marks the 95% interval of the matched-null median count; the dashed line is the real median. A real median inside the band indicates a typical count indistinguishable from data with no latent types.](../figures/fig1_spec_curve_null_median.png){width=95%}
 
 ## Whether there is any real structure to explain
 
@@ -347,6 +374,10 @@ The central test concerns the count itself. The real data carry structure the nu
 In all five analyses the real median falls within the null's 95% interval (Table 1, H3). In the NEO-120 domains, for example, the real median is five components against a null interval of [4.0, 7.0], so the observed value is unremarkable relative to a typeless population; the same holds in every dataset. The structure detected by H1 does not, by this measure, raise the typical number of types above what a population with no latent types yields under the identical procedure. Figure 1 displays the comparison: the real median (dashed line) lies within the null interval (grey band) in every panel.
 
 The mean diverges from the median, and the divergence is informative. Summarized by the mean rather than the median, the count exceeds the null in three of the five datasets. The two summaries differ because the per-model counts are right-skewed: a few covariance parameterizations select at the ten-component ceiling while most select far fewer, which raises the mean but leaves the median unaffected. I preregistered the median and report the mean alongside it. That the verdict can depend on the choice between two routine summaries of the same fourteen values, made after the values are known, is the kind of analytic flexibility this study is designed to expose, and the reason the summary statistic was fixed in advance.
+
+A second sensitivity check restricts the summary to the eight fully ellipsoidal parameterizations, the family the data reward. There the picture is tighter: the confirmatory datasets remain within the null's ellipsoid-only interval, though exactly at its upper boundary, while both HEXACO analyses exceed it (Table S3). The registered statistic remains the fourteen-model median, fixed before the data were seen; the family-restricted read repeats the lesson of H1, that these data carry real structure a Gaussian twin does not reproduce, and hands the decisive question to the tests that follow, whether that structure is categorical.
+
+The registered ICL arm points the same way. ICL penalizes overlapping components, so it selects clusters only when they are separated; on these data it selects a single component under most parameterizations in every dataset, all fourteen in the IPIP-50, and never more than two by the registered median (Table S4). Read against the BIC arm, the pattern is the same message in a second voice: the fit improvements that BIC rewards do not come with the separation that would mark types.
 
 **Table 1.** Real data compared with the matched null, by analysis. H1 holds when the real clustering gain ($\Delta$BIC of the best mixture over a single component) exceeds the null's 95th percentile; H3 holds when the real median count lies within the null's 95% interval. Both hold in every analysis.
 
@@ -372,16 +403,16 @@ The two procedures do not always agree, and Figure 2 reports their range rather 
 
 A further pair of preregistered checks evaluates the selected solution directly, granting for the moment that its components are real and asking whether they behave as latent types would. The first is the confident-assignment share: the proportion of respondents whose maximum posterior probability of component membership exceeds the preregistered threshold of .8. Genuine types would assign most respondents to a single component with high posterior probability. The second is the first-split share: the proportion of the total BIC gain (the improvement of the selected solution over a single component) attributable to the first division, from one component to two. The rationale, fixed in advance, is that partitioning a continuum yields most of its fit improvement at the first split and diminishing returns thereafter, whereas separable types continue to improve fit as components are added.
 
-Both indicators are consistent with continuity (Table 2). The confident-assignment share is below 50% in every dataset, from 14.6% (NEO-120 domains) to 48.0% (NEO-120 facets). The first-split share exceeds 75% in four of the five datasets, reaching 98.9% in the HEXACO facets; the exception is the fifty-item inventory at 61.8%. Under the selected solutions, most respondents are not assigned to any component with high confidence, and most of the fit improvement is concentrated in a single binary division.
+Both indicators are consistent with continuity (Table 2). The confident-assignment share is below 50% in every dataset, from 10.6% (IPIP-50 domains) to 48.9% (NEO-120 facets). The first-split share exceeds 75% in four of the five datasets, reaching 98.9% in the HEXACO facets; the exception is the fifty-item inventory at 59.4%. Under the selected solutions, most respondents are not assigned to any component with high confidence, and most of the fit improvement is concentrated in a single binary division.
 
 **Table 2.** The BIC-selected mixture solution for each dataset and two preregistered properties of it. Confident assignment: the proportion of respondents with maximum posterior membership probability above .8. First-split share: the proportion of the total BIC gain (selected solution over a single component) contributed by the one-to-two-component division.
 
 | Slice | Model | $k$ | Confident assign. (>.8) | First-split share |
 |:--|:--:|:--:|:--:|:--:|
-| NEO-120 dom. | VEE | 5 | 14.6% | 88.7% |
-| NEO-120 fac. | VEE | 5 | 48.0% | 89.6% |
-| IPIP-50 dom. | VVI | 8 | 25.1% | 61.8% |
-| HEXACO dom. | VVE | 3 | 30.0% | 82.8% |
+| NEO-120 dom. | VEE | 5 | 16.0% | 90.2% |
+| NEO-120 fac. | VEE | 5 | 48.9% | 88.7% |
+| IPIP-50 dom. | VVE | 8 | 10.6% | 59.4% |
+| HEXACO dom. | VVE | 4 | 24.0% | 86.6% |
 | HEXACO fac. | VEE | 3 | 46.0% | 98.9% |
 
 ## Whether the procedure could detect types if present
@@ -390,17 +421,17 @@ A null result is informative only if the procedure can detect types when they ar
 
 The first kind is defined entirely by dependence. Its two components share an identical marginal distribution on every variable and differ only in the orientation of their correlations, so the grouping is absent from every univariate distribution and present only in the joint structure. The procedure detects this kind, and detection increases with signal strength: as the correlation difference grows, the real median count separates from the null, rising from one to two to nine and ten, while the null median remains at one. This regime is the more relevant one for personality, because a central form of the type hypothesis, types that differ in the configuration of traits rather than in the level of any single trait, would produce structure of this kind.
 
-The second kind defines the procedure's limit. Here the components differ in their means, so the separation also enters the univariate distributions. At moderate separations the procedure still detects the structure, registering it at mean differences of 1.5 and 2.0 standard deviations. At the largest separation tested, 3.0 standard deviations, it does not: at that point each univariate distribution is itself bimodal, and the margin-preserving null reproduces the same partition without any latent groups having been specified. The limitation is therefore specific to types separated enough to appear in the univariate distributions. Personality trait scores are unimodal, which places the present data in the regime where the procedure has power.
+The second kind defines the procedure's limit. Here the components differ in their means, so the separation also enters the univariate distributions. At moderate separations the procedure still detects the structure, registering it at mean differences of 1.5 and 2.0 standard deviations. At the largest separation tested, 3.0 standard deviations, it does not: at that point the separation is carried almost entirely by the margins and covariance jointly, which the null preserves by construction, so the null reproduces the same partition without any latent groups having been specified. The limitation is therefore specific to types separated enough to enter the margins and covariance together. The trait margins here show nothing comparable: unimodality tests on the raw scores reject only because summed Likert scales are granular, and after a tie-breaking jitter 64 of the 65 margins retain unimodality [@hartigan1985]; the null in any case inherits each margin exactly, granularity included, so the present data sit in the regime where the procedure has power.
 
-![Positive controls on synthetic data with known structure. Grey band: the 95% interval of the matched-null median count. Points: the real median count, red where it exceeds the null. Left: types defined only by dependence (identical margins, opposite correlation orientation) are detected, increasingly so with signal strength. Right: types separated in their means are detected at moderate separation and are reproduced by the margin-preserving null only at the largest separation, where each margin is itself bimodal. Personality trait scores are unimodal, placing them in the left regime.](../figures/fig3_positive_control.png){width=95%}
+![Positive controls on synthetic data with known structure. Grey band: the 95% interval of the matched-null median count. Points: the real median count, red where it exceeds the null. Left: types defined only by dependence (identical margins, opposite correlation orientation) are detected, increasingly so with signal strength. Right: types separated in their means are detected at moderate separation and are reproduced by the null only at the largest separation, where the separation is fully carried by the margins and covariance the null preserves. Personality trait margins carry no such separation, placing these data in the left regime.](../figures/fig3_positive_control.png){width=95%}
 
 ## Verdict
 
-The preregistered rule classifies a structure as continuous only if four conditions hold jointly: a mean registered CCFI below .45 with no trait categorical; a confident-assignment share below 50%; a first-split share above 75%; and a median count indistinguishable from the null (H3). A categorical classification requires the converse of each.
+The preregistered rule (registered as H2) classifies a structure as continuous only if four conditions hold jointly: a mean registered CCFI below .45 with no trait categorical; a confident-assignment share below 50%; a first-split share above 75%; and a median count indistinguishable from the null (H3). A categorical classification requires the converse of each.
 
-The NEO-120, the only dataset whose held-out respondents are almost entirely naive, satisfies all four: CCFI .375, confident-assignment shares of 14.6% and 48.0%, first-split shares of 88.7% and 89.6%, and a median count within the null interval. HEXACO satisfies all four as well (CCFI .430), though I treat it as a robustness check rather than a confirmation because its held-out sample overlaps the exploratory split. The fifty-item inventory defines no facets and yields no CCFI; of the three criteria available to it, it satisfies two (confident assignment and the count test) and falls below threshold on the first-split share (61.8% against 75%).
+The NEO-120, the only dataset whose held-out respondents are almost entirely naive, satisfies all four: CCFI .375, confident-assignment shares of 16.0% and 48.9%, first-split shares of 90.2% and 88.7%, and a median count within the null interval. HEXACO satisfies all four as well (CCFI .430), though I treat it as a robustness check rather than a confirmation because its held-out sample overlaps the exploratory split. The fifty-item inventory defines no facets and yields no CCFI; of the three criteria available to it, it satisfies two (confident assignment and the count test) and falls below threshold on the first-split share (59.4% against 75%); under the registered rule it is therefore unclassified rather than continuous.
 
-This single exception is not a categorical indicator. A categorical signature, under the preregistered rule, comprises a CCFI above .55, a clear BIC minimum with separated component centers, a majority of respondents confidently assigned, and a count stable across datasets; none of these appears in any of the three datasets. A first-split share of 61.8% indicates that the fit improvement is distributed across more than one division, which is consistent with graded structure rather than discrete classes. The conclusion is consistent across datasets: there is no evidence for separated types. The clusters these data produce are reproduced by a matched null, and the residual non-Gaussian structure does not increase the number of types or satisfy the criteria for categorical structure.
+This single exception is not a categorical indicator. A categorical signature, under the preregistered rule, comprises a CCFI above .55, a clear BIC minimum with separated component centers, a majority of respondents confidently assigned, and a count stable across datasets; none of these appears in any of the three datasets. A first-split share of 59.4% indicates that the fit improvement is distributed across more than one division, which is consistent with graded structure rather than discrete classes. The conclusion is consistent across datasets: there is no evidence for separated types. The clusters these data produce are reproduced by a matched null, and the residual non-Gaussian structure does not increase the number of types or satisfy the criteria for categorical structure.
 
 # Discussion
 
@@ -416,7 +447,7 @@ The approach is not specific to personality. Any claim that continuous measureme
 
 Several limitations apply. A multiverse analysis is bounded by the choices it spans; I varied the covariance parameterization exhaustively but held the mixture family, the selection criterion, and the indicator resolution fixed, and a broader specification space could be examined. Because the null fixes only linear dependence, a clustering generated by genuinely nonlinear but still continuous structure registers as real without being categorical, which is consistent with the present results and is the behavior the null is intended to produce. The datasets are large but self-selected, drawn from a single item pool, and subsampled for tractability, and the HEXACO hold-out is not naive. Finally, the analysis tests for separated categories and their number, not for the practical utility of a typology; finding no taxa does not establish that a typology is never a useful shorthand, only that it does not correspond to a discovery of discrete kinds.
 
-The practical implication is straightforward. A number of clusters is not by itself a finding; it becomes one only when it exceeds what the data's own margins and covariance produce and is stable across choices, such as the covariance parameterization, that should not affect a substantive conclusion. The procedure is available for reuse, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
+The practical implication is straightforward. A number of clusters is not by itself a finding; it becomes one only when it exceeds what the data's own margins and covariance produce and is stable across choices, such as the covariance parameterization, that should not affect a substantive conclusion. In use, the count test should follow a check of the margins for pronounced multimodality, the one regime where the null is blind, with granular scales tested after tie-breaking. The null itself is defined at the level of the data, not of any particular pipeline, so a published typology's own procedure can be run unchanged on copula twins of its data; the present study applies the test to BIC-selected mixtures, and applying it to other pipelines is direct reuse. The procedure is available for that purpose, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
 
 # Conclusion
 
@@ -459,6 +490,36 @@ The number of types a method reports is not, by itself, a property of the people
 | HEXACO Agreeableness | .385 | .564 | .475 | .471 |
 | HEXACO Conscientiousness | .240 | .562 | .401 | .542 |
 | HEXACO Openness | .302 | .496 | .399 | .546 |
+
+**Table S3.** Sensitivity of the count test to the covariance family: the median selected count computed over the eight fully ellipsoidal parameterizations only, for the real data and for the matched null (95% interval of the null's ellipsoid-only median). The confirmatory datasets sit exactly at the null's upper boundary; both HEXACO analyses exceed it.
+
+| Slice | Real ellipsoid-only median | Null 95% interval | Within |
+|:--|:--:|:--:|:--:|
+| NEO-120 dom. | 4.0 | [2.50, 4.00] | yes, at boundary |
+| NEO-120 fac. | 2.0 | [1.50, 2.00] | yes, at boundary |
+| IPIP-50 dom. | 6.5 | [4.00, 6.50] | yes, at boundary |
+| HEXACO dom. | 4.0 | [1.74, 3.00] | no, exceeds |
+| HEXACO fac. | 2.0 | [1.00, 1.39] | no, exceeds |
+
+**Table S4.** The registered grid's ICL arm: the number of components ICL selects under each covariance parameterization, on the same held-out subsamples as Table S1. ICL adds an entropy penalty to BIC and therefore prefers well-separated solutions; it selects one component for most parameterizations in every dataset, including all fourteen in the IPIP-50.
+
+| Model | NEO-120 dom. | NEO-120 fac. | IPIP-50 dom. | HEXACO dom. | HEXACO fac. |
+|:--|:--:|:--:|:--:|:--:|:--:|
+| EII | 2 | 10 | 1 | 3 | 10 |
+| VII | 2 | 10 | 1 | 1 | 10 |
+| EEI | 2 | 10 | 1 | 1 | 10 |
+| VEI | 2 | 10 | 1 | 1 | 10 |
+| EVI | 2 | 10 | 1 | 1 | 10 |
+| VVI | 2 | 10 | 1 | 1 | 10 |
+| EEE | 1 | 1 | 1 | 1 | 1 |
+| EVE | 1 | 1 | 1 | 1 | 1 |
+| VEE | 1 | 2 | 1 | 1 | 2 |
+| VVE | 1 | 2 | 1 | 1 | 2 |
+| EEV | 1 | 1 | 1 | 1 | 1 |
+| VEV | 1 | 2 | 1 | 1 | 1 |
+| EVV | 1 | 1 | 1 | 1 | 1 |
+| VVV | 1 | 2 | 1 | 1 | 1 |
+| **Median** | **1** | **2** | **1** | **1** | **2** |
 
 # References {.unnumbered}
 
