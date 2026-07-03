@@ -207,7 +207,9 @@ halves overlap, with about 88 percent of its hold-out also in the exploratory sp
 robustness check rather than a clean confirmation. Every model was fit to a random subsample of the
 held-out part, 8,000 cases at the domain level and 5,000 at the facet level. One housekeeping point
 matters later: mixtures tend to select more components as the sample grows, so I always compare the real
-data and its null at the same sample size.
+data and its null at the same sample size. The dependence is steep in these data: at the domain level
+the median selected count rises from about 2.5 at n = 2,000 to the grid ceiling at n = 32,000
+(Table S6).
 
 ## The covariance multiverse
 A mixture model asks how many components best describe a cloud of points, and the answer turns on a
@@ -272,13 +274,12 @@ directly.
 
 In plain terms, the null is a synthetic dataset whose every histogram and every correlation match the
 real one but which is guaranteed to contain no real groups; if it produces as many types as the real
-data, the types were the shape of the data, not a feature of the people. I drew sixty such nulls for each
-domain dataset and fifty for each facet dataset, each at the matched sample size, and ran the full
+data, the types were the shape of the data, not a feature of the people. I drew two hundred such nulls for each dataset, each at the matched sample size, and ran the full
 fourteen-model specification curve on every one. The registration specified 1,000 null replicates; the
-cost of the fourteen-model grid per replicate made that impractical, and the counts above are a reported
-deviation. The resulting Monte Carlo error is modest: bootstrap standard errors for the null interval
-endpoints run from 0.03 to 0.55 components, and no verdict in Table 1 changes when an endpoint is moved
-by twice its standard error.
+cost of the fourteen-model grid per replicate made that impractical, and two hundred were drawn instead,
+a reported deviation. The resulting Monte Carlo error is small: bootstrap standard errors for the null
+interval endpoints run from 0.07 to 0.31 components, and no verdict in Table 1 changes when an endpoint
+is moved by twice its standard error.
 
 ## The matched-null tests
 Two quantities are read against the null distribution. The first asks whether the data carry any
@@ -325,6 +326,16 @@ means, so the separation does enter the histograms; the centroid separation rang
 deviations. For each setting I ran the specification curve on the synthetic data and on forty copula
 nulls of it, and counted a detection when the real median count exceeds the null's 97.5th percentile.
 
+Two extensions place the procedure among existing referees and check its calibration. First, on the
+same synthetic datasets I ran two standard competitors: the gap statistic [@tibshirani2001], with a
+k-means base, fifty reference draws, and the principal-component-aligned uniform reference, and the
+bootstrap likelihood-ratio test [@mclachlan1987] under the correctly specified VVV family with
+ninety-nine bootstrap draws (Table S5). Second, I calibrated the false-positive rate on typeless data:
+one hundred datasets drawn from a Gaussian with the correlation matrix of the real NEO-120 domains, and
+one hundred more with the same Gaussian copula but skewed margins (chi-square, beta, and squared-uniform
+transforms), the regime in which mixtures over-extract [@bauer2003]. Each dataset was compared with
+forty of its own copula nulls at n = 2,000, with the same 97.5th-percentile criterion (Table S7).
+
 ## The pre-registered decision rule
 The rule was set before the hold-out opened; the full text is in the registration. An instrument is
 credited with real structure only if it clears H1. I then call its structure continuous only if four
@@ -344,7 +355,8 @@ three-quarters) are conventions fixed at registration rather than derived quanti
 the underlying proportions, so any alternative threshold can be applied directly.
 
 ## Software
-R [@rcoreteam], with mclust for the mixtures and RTaxometrics for the CCFI; seed 20260620 throughout.
+R 4.5.2 [@rcoreteam], with mclust 6.1.2 [@scrucca2016] for the mixtures, RTaxometrics 3.2.1
+[@ruscio_rtax] for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout.
 Data, code, and the registration are public.
 
 # Results
@@ -375,7 +387,7 @@ In all five analyses the real median falls within the null's 95% interval (Table
 
 The mean diverges from the median, and the divergence is informative. Summarized by the mean rather than the median, the count exceeds the null in three of the five datasets. The two summaries differ because the per-model counts are right-skewed: a few covariance parameterizations select at the ten-component ceiling while most select far fewer, which raises the mean but leaves the median unaffected. I preregistered the median and report the mean alongside it. That the verdict can depend on the choice between two routine summaries of the same fourteen values, made after the values are known, is the kind of analytic flexibility this study is designed to expose, and the reason the summary statistic was fixed in advance.
 
-A second sensitivity check restricts the summary to the eight fully ellipsoidal parameterizations, the family the data reward. There the picture is tighter: the confirmatory datasets remain within the null's ellipsoid-only interval, though exactly at its upper boundary, while both HEXACO analyses exceed it (Table S3). The registered statistic remains the fourteen-model median, fixed before the data were seen; the family-restricted read repeats the lesson of H1, that these data carry real structure a Gaussian twin does not reproduce, and hands the decisive question to the tests that follow, whether that structure is categorical.
+A second sensitivity check restricts the summary to the eight fully ellipsoidal parameterizations, the family the data reward. There the picture is tighter: the confirmatory datasets remain within the null's ellipsoid-only interval, two of the three at its upper boundary, while both HEXACO analyses exceed it (Table S3). The registered statistic remains the fourteen-model median, fixed before the data were seen; the family-restricted read repeats the lesson of H1, that these data carry real structure a Gaussian twin does not reproduce, and hands the decisive question to the tests that follow, whether that structure is categorical.
 
 The registered ICL arm points the same way. ICL penalizes overlapping components, so it selects clusters only when they are separated; on these data it selects a single component under most parameterizations in every dataset, all fourteen in the IPIP-50, and never more than two by the registered median (Table S4). Read against the BIC arm, the pattern is the same message in a second voice: the fit improvements that BIC rewards do not come with the separation that would mark types.
 
@@ -383,11 +395,11 @@ The registered ICL arm points the same way. ICL penalizes overlapping components
 
 | Slice | $n$ | Real median $k$ | Null 95% interval (H3) | Real $\Delta$BIC | Null 95th (H1) |
 |:--|--:|:--:|:--:|--:|--:|
-| NEO-120 dom. | 8,000 | 5 | [4.0, 7.0] | 717 | 485 |
-| NEO-120 fac. | 5,000 | 4 | [3.0, 6.4] | 4,013 | 1,073 |
-| IPIP-50 dom. | 8,000 | 8 | [6.0, 8.8] | 1,369 | 913 |
-| HEXACO dom. | 8,000 | 7 | [3.5, 7.5] | 816 | 213 |
-| HEXACO fac. | 5,000 | 4 | [1.0, 4.9] | 2,701 | 337 |
+| NEO-120 dom. | 8,000 | 5 | [4.0, 7.0] | 717 | 488 |
+| NEO-120 fac. | 5,000 | 4 | [3.0, 7.0] | 4,013 | 1,122 |
+| IPIP-50 dom. | 8,000 | 8 | [6.0, 9.0] | 1,369 | 915 |
+| HEXACO dom. | 8,000 | 7 | [3.5, 7.5] | 816 | 221 |
+| HEXACO fac. | 5,000 | 4 | [1.0, 5.5] | 2,701 | 344 |
 
 ## Whether the traits are categorical under a different method
 
@@ -422,6 +434,8 @@ A null result is informative only if the procedure can detect types when they ar
 The first kind is defined entirely by dependence. Its two components share an identical marginal distribution on every variable and differ only in the orientation of their correlations, so the grouping is absent from every univariate distribution and present only in the joint structure. The procedure detects this kind, and detection increases with signal strength: as the correlation difference grows, the real median count separates from the null, rising from one to two to nine and ten, while the null median remains at one. This regime is the more relevant one for personality, because a central form of the type hypothesis, types that differ in the configuration of traits rather than in the level of any single trait, would produce structure of this kind.
 
 The second kind defines the procedure's limit. Here the components differ in their means, so the separation also enters the univariate distributions. At moderate separations the procedure still detects the structure, registering it at mean differences of 1.5 and 2.0 standard deviations. At the largest separation tested, 3.0 standard deviations, it does not: at that point the separation is carried almost entirely by the margins and covariance jointly, which the null preserves by construction, so the null reproduces the same partition without any latent groups having been specified. The limitation is therefore specific to types separated enough to enter the margins and covariance together. The trait margins here show nothing comparable: unimodality tests on the raw scores reject only because summed Likert scales are granular, and after a tie-breaking jitter 64 of the 65 margins retain unimodality [@hartigan1985]; the null in any case inherits each margin exactly, granularity included, so the present data sit in the regime where the procedure has power.
+
+The procedure is also calibrated, and the competing referees divide cleanly. On one hundred typeless datasets built on the real NEO-120 domain correlation matrix, jointly Gaussian, the registered test fired in none (nominal rate 2.5%). On one hundred more with the same Gaussian copula but skewed margins, the over-extraction regime documented by @bauer2003, it again fired in none, while BIC selection reported more than one component in every one of the hundred datasets, 9.7 on average of a possible ten, and the bootstrap likelihood-ratio test did the same in all thirty datasets tested (Table S7). On the positive controls the pattern reverses (Table S5): the gap statistic never detects the dependence-defined types at any signal strength, while the bootstrap test detects and counts them where its parametric family is exactly right. Each referee fails somewhere. The matched-null test is the one that both detects types living in the dependence and stays quiet on typeless data of either kind; its own boundary, separation strong enough to enter the margins and covariance, is the one described above.
 
 ![Positive controls on synthetic data with known structure. Grey band: the 95% interval of the matched-null median count. Points: the real median count, red where it exceeds the null. Left: types defined only by dependence (identical margins, opposite correlation orientation) are detected, increasingly so with signal strength. Right: types separated in their means are detected at moderate separation and are reproduced by the null only at the largest separation, where the separation is fully carried by the margins and covariance the null preserves. Personality trait margins carry no such separation, placing these data in the left regime.](../figures/fig3_positive_control.png){width=95%}
 
@@ -491,15 +505,15 @@ The number of types a method reports is not, by itself, a property of the people
 | HEXACO Conscientiousness | .240 | .562 | .401 | .542 |
 | HEXACO Openness | .302 | .496 | .399 | .546 |
 
-**Table S3.** Sensitivity of the count test to the covariance family: the median selected count computed over the eight fully ellipsoidal parameterizations only, for the real data and for the matched null (95% interval of the null's ellipsoid-only median). The confirmatory datasets sit exactly at the null's upper boundary; both HEXACO analyses exceed it.
+**Table S3.** Sensitivity of the count test to the covariance family: the median selected count computed over the eight fully ellipsoidal parameterizations only, for the real data and for the matched null (95% interval of the null's ellipsoid-only median, 200 replicates). Two confirmatory analyses sit at the null's upper boundary; both HEXACO analyses exceed it.
 
 | Slice | Real ellipsoid-only median | Null 95% interval | Within |
 |:--|:--:|:--:|:--:|
 | NEO-120 dom. | 4.0 | [2.50, 4.00] | yes, at boundary |
-| NEO-120 fac. | 2.0 | [1.50, 2.00] | yes, at boundary |
-| IPIP-50 dom. | 6.5 | [4.00, 6.50] | yes, at boundary |
-| HEXACO dom. | 4.0 | [1.74, 3.00] | no, exceeds |
-| HEXACO fac. | 2.0 | [1.00, 1.39] | no, exceeds |
+| NEO-120 fac. | 2.0 | [1.50, 2.50] | yes |
+| IPIP-50 dom. | 6.5 | [3.99, 6.50] | yes, at boundary |
+| HEXACO dom. | 4.0 | [2.00, 3.01] | no, exceeds |
+| HEXACO fac. | 2.0 | [1.00, 1.50] | no, exceeds |
 
 **Table S4.** The registered grid's ICL arm: the number of components ICL selects under each covariance parameterization, on the same held-out subsamples as Table S1. ICL adds an entropy penalty to BIC and therefore prefers well-separated solutions; it selects one component for most parameterizations in every dataset, including all fourteen in the IPIP-50.
 
@@ -520,6 +534,36 @@ The number of types a method reports is not, by itself, a property of the people
 | EVV | 1 | 1 | 1 | 1 | 1 |
 | VVV | 1 | 2 | 1 | 1 | 1 |
 | **Median** | **1** | **2** | **1** | **1** | **2** |
+
+**Table S5.** Competing referees on the positive-control data of Figure 3. Truth is the generating number of components. Matched null: whether the registered count test fires (real median above the nulls' 97.5th percentile). gap: the number selected by the gap statistic (k-means base, fifty reference draws). bLRT: the number selected by the bootstrap likelihood-ratio test under the correctly specified VVV family (99 draws, sequential tests at .05). BIC: the number selected by the BIC envelope over the fourteen parameterizations. The gap statistic never detects the dependence-defined types; the bootstrap test recovers them where its parametric family is exactly right; the matched-null test detects them from moderate signal and, as registered, goes quiet at 3 SD, its stated boundary.
+
+| Panel | Signal | Truth | Matched null | gap | bLRT | BIC |
+|:--|:--:|:--:|:--:|:--:|:--:|:--:|
+| A (dependence) | 0 | 1 | quiet | 1 | 1 | 1 |
+| A (dependence) | .30 | 2 | quiet | 1 | 1 | 1 |
+| A (dependence) | .50 | 2 | detected | 1 | 2 | 2 |
+| A (dependence) | .70 | 2 | detected | 1 | 2 | 2 |
+| A (dependence) | .85 | 2 | detected | 1 | 2 | 2 |
+| B (separation) | 0 | 1 | quiet | 1 | 1 | 1 |
+| B (separation) | 1.0 | 2 | quiet | 1 | 2 | 2 |
+| B (separation) | 1.5 | 2 | detected | 2 | 2 | 2 |
+| B (separation) | 2.0 | 2 | detected | 2 | 2 | 2 |
+| B (separation) | 3.0 | 2 | quiet | 2 | 2 | 2 |
+
+**Table S6.** The median selected count as a function of subsample size, domain level (fourteen-model grid, held-out data). The HEXACO column at its largest size uses the full hold-out (n = 11,367). The count is a function of n, which is why every comparison in the paper matches the null to the real data's sample size.
+
+| Slice | n = 2,000 | n = 8,000 | n = 32,000 |
+|:--|:--:|:--:|:--:|
+| NEO-120 dom. | 2.5 | 5.0 | 10.0 |
+| IPIP-50 dom. | 5.0 | 8.0 | 10.0 |
+| HEXACO dom. | 2.0 | 7.0 | 7.5 |
+
+**Table S7.** False-positive calibration on typeless data: 100 datasets per scenario, n = 2,000, five variables, correlation matrix taken from the real NEO-120 domains; forty copula nulls per dataset; the test fires when the real fourteen-model median exceeds the nulls' 97.5th percentile (nominal rate 2.5%). The skewed scenario transforms the margins (chi-square, beta, squared-uniform) while keeping the Gaussian copula: no types exist, but the data are non-normal, the over-extraction regime of Bauer and Curran (2003). The bootstrap LRT was run on the first thirty datasets of each scenario.
+
+| Scenario | Matched-null test fired | BIC selects k > 1 | Mean BIC k | gap selects k > 1 | bLRT selects k > 1 |
+|:--|:--:|:--:|:--:|:--:|:--:|
+| Gaussian, typeless | 0% | 0% | 1.0 | 1% | 0% (0/30) |
+| Skewed margins, typeless | 0% | 100% | 9.7 | 1% | 100% (30/30) |
 
 # References {.unnumbered}
 
