@@ -90,8 +90,8 @@ is something you can hold in your head; a position in a five- or six-dimensional
 
 But a clustering method will find types whether or not any are there. Give a mixture model a single
 smooth cloud of data and it still reports two or three or ten groups, because each added group trims
-the fit a little and the selection rule takes the trade. A clean partition, on its own, establishes
-little. The question is whether its groups mark anything beyond the shape the data already had.
+the fit a little and the selection rule takes the trade, so a clean partition on its own establishes
+little; the question is whether its groups mark anything beyond the shape the data already had.
 
 On personality itself, the argument is largely over. Taxometric[^taxa] and structural studies have looked
 for categories in trait data for years and kept finding gradients instead [@haslam2012; @haslam2020]. I do
@@ -106,10 +106,11 @@ output and *taxa* that would have to exist in the population for those types to 
 
 Past attempts to impose that discipline fall short in ways worth naming. The best-known typology study
 tested its clusters against data with all the associations shuffled out [@gerlach2018], but data with
-no correlations is a low bar, and almost anything real clears it. A later comment said as much, without
-building the alternative it asked for [@katahira2020]. Taxometrics asks the categorical-versus-continuous
-question head-on [@meehl1995; @ruscio2006], but it works from a fixed set of indicators and has nothing
-to say about how many clusters there are, or how that number moves when the model changes.
+no correlations is a low bar, and almost anything real clears it. A later comment made the same
+criticism but did not supply the null it called for [@katahira2020]. Taxometrics asks the
+categorical-versus-continuous question directly [@meehl1995; @ruscio2006], but it works from a fixed
+set of indicators; it does not say how many clusters there are, or how that number moves when the model
+changes.
 
 My approach has three parts, each drawn from an established literature; what is new is the null they are assembled around and the question that assembly makes testable. The null is a Gaussian copula. It keeps every
 trait's distribution and the whole covariance matrix and scrambles only what is left, the higher-order
@@ -120,7 +121,7 @@ mixture model and report the full spread of answers in place of any single prefe
 in taxometrics as an independent check, so the verdict does not rest on one method's assumptions. All
 of it is aimed at the personality-types question, across three datasets.
 
-The picture that comes back is consistent. Change the covariance assumption and the number of types
+The three datasets return the same answer. Change the covariance assumption and the number of types
 walks from one to ten. Hold the rest fixed and, by the measure I committed to in advance, that number
 is no different from what the typeless null gives. No trait crosses the taxometric line. None of that is
 new about personality. What it shows is that the test works, and that the next typology has something to
@@ -145,7 +146,7 @@ issue here: what a recovered cluster establishes about the population. What that
 one that turns a particular cluster-count claim into something that can fail, and shows how much it leans
 on choices no one inspects.
 
-## The null is where the argument lives
+## The choice of null
 An apparent grouping is "real" only against a null that says what real means here. Shuffle every
 association out of the data [@gerlach2018] and you have set the bar on the floor; the correlations alone
 will clear it. @katahira2020 saw this but stopped at the diagnosis. Nor do the standard referees for a cluster count
