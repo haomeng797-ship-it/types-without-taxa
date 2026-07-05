@@ -119,7 +119,10 @@ margins and correlations. This is the constructed null the earlier comment calle
 report a single number, I run the same test across all fourteen covariance parameterizations of the
 mixture model and report the full spread of answers in place of any single preferred one. And I bring
 in taxometrics as an independent check, so the verdict does not rest on one method's assumptions. All
-of it is aimed at the personality-types question, across three datasets.
+of it is aimed at the personality-types question, across three datasets. The test is also held to
+the standard it imposes: positive controls show that it detects types deliberately built into
+synthetic data, and calibration on typeless data, Gaussian and skewed alike, shows that it stays
+quiet when there is nothing to find.
 
 The three datasets return the same answer. Change the covariance assumption and the number of types
 walks from one to ten. Hold the rest fixed and, by the measure I committed to in advance, that number
@@ -131,11 +134,13 @@ answer to.
 
 ## A cluster solution settles nothing on its own
 Sorting people into kinds recurs in quantitative psychology under one label after another: clinical
-subtypes, learner profiles, market segments, data-driven personality types. The trouble is the same
-each time. Clustering and mixture methods exist to partition; give them continuous data and they
-partition it anyway, and a selection criterion will almost always prefer more than one piece. That mixture models in particular over-extract components when continuous data depart from normality is well established [@bauer2003]. So "the
-data support k clusters" quietly mixes a fact about people with a fact about the procedure, one that,
-left to itself, never says what a world with no types would have produced under the same treatment.
+subtypes, learner profiles, market segments, data-driven personality types. Each time the trouble is
+the same. Clustering and mixture methods exist to partition; give them continuous data and they
+partition it anyway, and a selection criterion will almost always prefer more than one piece. That
+mixture models over-extract components when continuous data depart from normality is well established
+[@bauer2003]. So "the data support k clusters" quietly mixes a fact about people with a fact about
+the procedure, and the procedure on its own never says what a world with no types would have produced
+under the same treatment.
 
 ## What is already settled
 On the substance, the verdict is in: two meta-analyses of the taxometric literature find trait structure
@@ -191,7 +196,7 @@ Before opening the held-out data I registered the decision rule and the specific
 20260620), and what follows reports every dataset, every covariance model, and the whole rule, with
 nothing added or dropped once the hold-out was in view. The three datasets are public and anonymized,
 and their sources are documented in the project repository alongside the complete analysis code; the
-study is a secondary analysis of these data and involved no new data collection. I report how the analysis subsamples were determined, all data exclusions, and all measures, and I follow the Journal Article Reporting Standards. Generative AI was used to assist in drafting and editing the text. The author takes full responsibility for all content and conclusions.
+study is a secondary analysis of these data and involved no new data collection. I report how the analysis subsamples were determined, all data exclusions, and all measures, and I follow the Journal Article Reporting Standards.
 
 ## Data
 I reanalyze three large public datasets, each already scored to traits and, where the instrument allows,
@@ -241,10 +246,10 @@ marginals into a joint distribution, separately from the marginals themselves. A
 distribution decomposes uniquely into its marginals and a copula; the *Gaussian* copula is the one whose
 dependence is fixed entirely by a correlation matrix, with no further joint structure.
 
-A useful way to picture this null is as a three-story building. The ground floor holds the marginals,
-each variable's histogram; the second floor holds the pairwise correlations; and everything from the
-third floor up holds the higher-order dependence, where any latent types would live, since groups within
-a dataset show up as conditional dependencies beyond the linear correlation. The copula null rebuilds the
+Pictured as a three-story building, the data hold their marginals, each variable's histogram, on the
+ground floor, and their pairwise correlations on the second; everything from the third floor up is
+higher-order dependence, where any latent types would live, since groups within a dataset show up as
+conditional dependencies beyond the linear correlation. The copula null rebuilds the
 ground floor and the second floor exactly as in the real data and leaves every floor above empty: once
 the correlation matrix is fixed, its Gaussian dependence adds no further joint structure. If clustering
 finds as many components in a building whose upper floors are empty as it does in the real data, those
@@ -273,7 +278,7 @@ Step 3 is the rank reordering of @iman1982; it matches the normal-scores rank co
 the Pearson covariance is reproduced only up to sampling error, which the 0.009 figure above verifies
 directly.
 
-In plain terms, the null is a synthetic dataset whose every histogram and every correlation match the
+The null, then, is a synthetic dataset whose every histogram and every correlation match the
 real one but which is guaranteed to contain no real groups; if it produces as many types as the real
 data, the types were the shape of the data, not a feature of the people. I drew two hundred such nulls for each dataset, each at the matched sample size, and ran the full
 fourteen-model specification curve on every one. The registration specified 1,000 null replicates; the
@@ -391,7 +396,7 @@ In all five analyses the real median falls within the null's 95% interval (Table
 
 The mean diverges from the median, and the divergence is informative. Summarized by the mean rather than the median, the count exceeds the null in three of the five datasets. The two summaries differ because the per-model counts are right-skewed: a few covariance parameterizations select at the ten-component ceiling while most select far fewer, which raises the mean but leaves the median unaffected. I preregistered the median and report the mean alongside it. That the verdict can depend on the choice between two routine summaries of the same fourteen values, made after the values are known, is the kind of analytic flexibility this study is designed to expose, and the reason the summary statistic was fixed in advance.
 
-A second sensitivity check restricts the summary to the eight fully ellipsoidal parameterizations, the family the data reward. There the picture is tighter: the confirmatory datasets remain within the null's ellipsoid-only interval, two of the three at its upper boundary, while both HEXACO analyses exceed it (Table S3). The registered statistic remains the fourteen-model median, fixed before the data were seen; the family-restricted read repeats the lesson of H1, that these data carry real structure a Gaussian twin does not reproduce, and hands the decisive question to the tests that follow, whether that structure is categorical.
+A second sensitivity check restricts the summary to the eight fully ellipsoidal parameterizations, the family the data favor. There the picture is tighter: the confirmatory datasets remain within the null's ellipsoid-only interval, two of the three at its upper boundary, while both HEXACO analyses exceed it (Table S3). The registered statistic remains the fourteen-model median, fixed before the data were seen; the family-restricted read repeats the lesson of H1, that these data carry real structure a Gaussian twin does not reproduce, and hands the decisive question to the tests that follow, whether that structure is categorical.
 
 The registered ICL arm points the same way. ICL penalizes overlapping components, so it selects clusters only when they are separated; on these data it selects a single component under most parameterizations in every dataset, all fourteen in the IPIP-50, and never more than two by the registered median (Table S4). Read against the BIC arm, the pattern is the same message in a second voice: the fit improvements that BIC rewards do not come with the separation that would mark types.
 
