@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Miura Meng">
-<meta name="dcterms.date" content="2026-07-04">
+<meta name="dcterms.date" content="2026-07-05">
 <meta name="keywords" content="mixture models, matched null, multiverse analysis, taxometrics, categorical versus continuous">
 
 <title>Types Without Taxa</title>
@@ -2396,7 +2396,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 4, 2026</p>
+      <p class="date">July 5, 2026</p>
     </div>
   </div>
   
@@ -2406,7 +2406,7 @@ window.Quarto = {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>A clustering method applied to personality data will return some number of “types” whether or not real types exist, which makes the familiar announcement that a dataset contains, say, four personality types hard to read: the number may describe people, or only the method. This paper offers a way to separate the two and applies it to the personality case. I compare each of three large public datasets (roughly one million respondents, across the IPIP-NEO-120, an IPIP Big-Five inventory, and the IPIP-HEXACO) against a matched null: a synthetic population built to reproduce the data’s trait distributions and full correlation structure exactly while containing no types by construction. The comparison runs across all fourteen covariance parameterizations a standard Gaussian mixture model can take, and a taxometric analysis provides an independent second reading. The full procedure was preregistered and run on held-out data. The number of types selected ranges from one to ten as a function of the covariance assumption alone; by the preregistered statistic it never exceeds what the typeless null produces; and no trait reaches a categorical threshold. The real data depart from the null only in higher-order structure, without acquiring types or turning categorical. Dimensional structure in personality is already well established; the contribution here is the test, a procedure to which any future claim of N types can be held.</p>
+    <p>A clustering method applied to personality data will return some number of “types” whether or not real types exist, which makes the familiar announcement that a dataset contains, say, four personality types hard to read: the number may describe people, or only the method. This paper offers a way to separate the two and applies it to the personality case. I compare each of three large public datasets (roughly one million respondents, across the IPIP-NEO-120, an IPIP Big-Five inventory, and the IPIP-HEXACO) against a matched null: a synthetic population built to reproduce the data’s trait distributions and full correlation structure exactly while containing no types by construction. The comparison runs across all fourteen covariance parameterizations a standard Gaussian mixture model can take, and a taxometric analysis provides an independent second reading. The full procedure was preregistered and run on held-out data. The number of types selected ranges from one to ten as a function of the covariance assumption alone; by the preregistered statistic it never exceeds what the typeless null produces; and no trait reaches a categorical threshold. The real data depart from the null only in higher-order structure, without acquiring types or turning categorical. Dimensional structure in personality is already well established; the contribution here is the test: a documented, reusable procedure to which any future claim of N types, from any clustering pipeline, can be held.</p>
   </div>
 </div>
 
@@ -2505,7 +2505,7 @@ window.Quarto = {
 </section>
 <section id="software" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="software"><span class="header-section-number">3.9</span> Software</h2>
-<p>R 4.5.2 <span class="citation" data-cites="rcoreteam">(<a href="#ref-rcoreteam" role="doc-biblioref">R Core Team, 2024</a>)</span>, with mclust 6.1.2 <span class="citation" data-cites="scrucca2016">(<a href="#ref-scrucca2016" role="doc-biblioref">Scrucca et al., 2016</a>)</span> for the mixtures, RTaxometrics 3.2.1 <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio, 2023</a>)</span> for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout. Data, code, and the registration are public.</p>
+<p>R 4.5.2 <span class="citation" data-cites="rcoreteam">(<a href="#ref-rcoreteam" role="doc-biblioref">R Core Team, 2024</a>)</span>, with mclust 6.1.2 <span class="citation" data-cites="scrucca2016">(<a href="#ref-scrucca2016" role="doc-biblioref">Scrucca et al., 2016</a>)</span> for the mixtures, RTaxometrics 3.2.1 <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio, 2023</a>)</span> for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout. The procedure is implemented as standalone, documented R functions, null construction, the count test, and the signature checks, that take any data matrix and any clustering routine; an R package is in preparation. Data, code, and the registration are public.</p>
 </section>
 </section>
 <section id="results" class="level1" data-number="4">
@@ -2705,7 +2705,15 @@ Figure 3: Positive controls on synthetic data with known structure. Grey band: 
 <p>The analysis also illustrates the problem it addresses. Whether the count exceeds the null depends on whether the per-model counts are summarized by their mean or their median, since a few parameterizations at the ten-component ceiling inflate the mean. I preregistered the median and report both; the divergence is itself an instance of the analytic flexibility the method is meant to surface, and a concrete reason to fix such a statistic in advance.</p>
 <p>The approach is not specific to personality. Any claim that continuous measurements fall into a given number of groups can be evaluated against a matched null, and reporting the distribution of results across reasonable specifications, rather than a single preferred one, applies wherever a modeling choice is incidental to the question. The matched null also supplies the constructed comparison that earlier critiques of typology research called for but did not provide <span class="citation" data-cites="katahira2020">(<a href="#ref-katahira2020" role="doc-biblioref">Katahira et al., 2020</a>)</span>, for which an independence null is insufficient.</p>
 <p>Several limitations apply. A multiverse analysis is bounded by the choices it spans; I varied the covariance parameterization exhaustively but held the mixture family, the selection criterion, and the indicator resolution fixed, and a broader specification space could be examined. Because the null fixes only linear dependence, a clustering generated by genuinely nonlinear but still continuous structure registers as real without being categorical, which is consistent with the present results and is the behavior the null is intended to produce. The datasets are large but self-selected, drawn from a single item pool, and subsampled for tractability, and the HEXACO hold-out is not naive. Finally, the analysis tests for separated categories and their number, not for the practical utility of a typology; finding no taxa does not establish that a typology is never a useful shorthand, only that it does not correspond to a discovery of discrete kinds.</p>
-<p>The practical implication is straightforward. A number of clusters is not by itself a finding; it becomes one only when it exceeds what the data’s own margins and covariance produce and is stable across choices, such as the covariance parameterization, that should not affect a substantive conclusion. In use, the count test should follow a check of the margins for pronounced multimodality, the one regime where the null is blind, with granular scales tested after tie-breaking. The null itself is defined at the level of the data, not of any particular pipeline, so a published typology’s own procedure can be run unchanged on copula twins of its data; the present study applies the test to BIC-selected mixtures, and applying it to other pipelines is direct reuse. The procedure is available for that purpose, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.</p>
+<p>The practical implication is straightforward. A number of clusters is not by itself a finding; it becomes one only when it exceeds what the data’s own margins and covariance produce and is stable across choices, such as the covariance parameterization, that should not affect a substantive conclusion. The test is a fixed workflow that any reported typology can be run through:</p>
+<ol type="1">
+<li>Inspect the margins for pronounced multimodality, the one regime where the null is blind; granular scales are tested after tie-breaking.</li>
+<li>Draw copula twins of the data (Algorithm 1).</li>
+<li>Run the identical clustering pipeline, whatever it is, on the real data and on every twin.</li>
+<li>Compare the real count with the twins’ distribution (H1 and H3).</li>
+<li>Read the categorical signatures of the selected solution: assignment confidence, first-split share, and, where the indicators allow, the CCFI.</li>
+</ol>
+<p>Because the null is defined at the level of the data rather than of any pipeline, a published typology’s own procedure can be run unchanged at step 3; the present study runs the workflow with BIC-selected mixtures, and other pipelines are direct reuse. The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.</p>
 </section>
 <section id="conclusion" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
