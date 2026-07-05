@@ -358,9 +358,9 @@ the underlying proportions, so any alternative threshold can be applied directly
 ## Software
 R 4.5.2 [@rcoreteam], with mclust 6.1.2 [@scrucca2016] for the mixtures, RTaxometrics 3.2.1
 [@ruscio_rtax] for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout. The
-procedure is implemented as standalone, documented R functions, null construction, the count test, and
-the signature checks, that take any data matrix and any clustering routine; an R package is in
-preparation.
+procedure is implemented in an R package, matchednull, whose functions, null construction, the count
+test, and the signature checks, take any data matrix and any clustering routine; it is publicly
+available, and a release on CRAN is planned.
 Data, code, and the registration are public.
 
 # Results
