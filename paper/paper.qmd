@@ -238,7 +238,14 @@ freely [@scrucca2016].
 To tell a real clustering from one that any dataset of this shape would show, I compare it against a
 Gaussian-copula null:[^copula] a twin of the data with the same margins and the same correlations, but no
 types built in. The null holds those two things fixed and frees the rest, replacing all higher-order
-dependence with plain Gaussian dependence, so by construction it contains no latent types.
+dependence with plain Gaussian dependence, so by construction it contains no latent types. The
+Gaussian copula is the minimal null for the role, not the most faithful one, and minimality is what
+the test needs. Its dependence is exhausted by the correlation matrix, so every higher-order
+dependency in the real data must come from the data rather than the null. A richer copula would defeat
+the purpose: a t copula adds tail dependence, and a vine copula can fit almost any dependence
+structure at all, so using either as the null would absorb into it the very structure the test is
+meant to detect, leaving a real-equals-null result that shows only that the null was too strong to say
+anything about types.
 
 [^copula]: The term *copula* (Latin *copula*, "tie, link," the root of English *couple*) is borrowed in
 statistics from Sklar [-@sklar1959], where it denotes the function that ties a set of one-variable
@@ -288,15 +295,18 @@ interval endpoints run from 0.07 to 0.31 components, and no verdict in Table 1 c
 is moved by twice its standard error.
 
 ## The matched-null tests
-Two quantities are read against the null distribution. The first asks whether the data carry any
-structure beyond their margins and correlations: $\Delta$BIC, the BIC of the best of the fourteen models
+The matched null answers two questions: whether the data carry any structure beyond their margins
+and covariance at all, and whether that structure raises the number of types. One statistic is read
+against the null for each. The first: $\Delta$BIC, the BIC of the best of the fourteen models
 minus the one-component BIC,[^dbic] is required to exceed the 95th percentile of the null's $\Delta$BIC
 (call this H1). The second is the registered test of how many types there are: the real median count
 across the fourteen models is required to fall inside the null's 95 percent interval for the count to be
-judged no larger than a typeless population's (H3). H1 is a low bar, certifying only that the data are
+judged no larger than a typeless population's (H3). The median is less sensitive than the mean to the
+few parameterizations censored at the ten-component ceiling; the mean is reported alongside it in the
+Results, and the choice between them is taken up in the Discussion. H1 is a low bar, certifying only that the data are
 not Gaussian, and serves as a precondition; H3 is the test that bears on types. The registration also
-defines H2, a composite verdict that the structure is continuous, requiring four criteria to hold
-jointly; it is evaluated under the pre-registered decision rule below, so the labels here follow the
+defines H2: not a further statistical test but a composite verdict that the structure is continuous,
+requiring four criteria to hold jointly; it is evaluated under the pre-registered decision rule below, so the labels here follow the
 registration.
 
 [^dbic]: By the conventional reading a $\Delta$BIC above 10 is very strong evidence for the
@@ -464,7 +474,7 @@ I take this primarily as a methodological result rather than a substantive one. 
 
 The claim is deliberately narrow. The matched null tests whether a clustering exceeds the linear dependence already present in the data, and on that test the real data do carry structure the null cannot reproduce: every dataset cleared H1. That residual structure does not, however, increase the number of types or produce categorical taxometric curves. The supported conclusion is therefore "no evidence for separated types" rather than "strictly continuous." Some real departure from joint normality is present in every dataset, below the level of a discrete class, and I do not attempt to characterize it here; skew, mild nonlinearity, or uneven density would each suffice, and none constitutes a kind of person.
 
-The analysis also illustrates the problem it addresses. Whether the count exceeds the null depends on whether the per-model counts are summarized by their mean or their median, since a few parameterizations at the ten-component ceiling inflate the mean. I preregistered the median and report both; the divergence is itself an instance of the analytic flexibility the method is meant to surface, and a concrete reason to fix such a statistic in advance.
+The analysis also illustrates the problem it addresses. Whether the count exceeds the null depends on whether the per-model counts are summarized by their mean or their median, since a few parameterizations at the ten-component ceiling inflate the mean. The count from any single parameterization is bounded above by the grid ceiling, so the per-model counts are right-censored, and the mean of a right-censored batch is pulled by the ceiling rather than describing the bulk of the parameterizations; I preregistered the median for that reason, and report both; the divergence is itself an instance of the analytic flexibility the method is meant to surface, and a concrete reason to fix such a statistic in advance.
 
 The approach is not specific to personality. Any claim that continuous measurements fall into a given number of groups can be evaluated against a matched null, and reporting the distribution of results across reasonable specifications, rather than a single preferred one, applies wherever a modeling choice is incidental to the question. The matched null also supplies the constructed comparison that earlier critiques of typology research called for but did not provide [@katahira2020], for which an independence null is insufficient.
 
@@ -478,7 +488,7 @@ The practical implication is straightforward. A number of clusters is not by its
 4. Compare the real count with the twins' distribution (H1 and H3).
 5. Read the categorical signatures of the selected solution: assignment confidence, first-split share, and, where the indicators allow, the CCFI.
 
-Because the null is defined at the level of the data rather than of any pipeline, a published typology's own procedure can be run unchanged at step 3; the present study runs the workflow with BIC-selected mixtures, and other pipelines are direct reuse. The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
+Because the null is defined at the level of the data rather than of any pipeline, a published typology's own procedure can be run unchanged at step 3. The framework is algorithm-agnostic in principle; the present study demonstrates it with Gaussian mixtures, and validating it under other clustering families is a direct extension. The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
 
 # Conclusion
 
