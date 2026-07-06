@@ -2542,21 +2542,21 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <p><strong>Table 1.</strong> Real data compared with the matched null, by analysis. H1 holds when the real clustering gain (<span class="math inline">\(\Delta\)</span>BIC of the best mixture over a single component) exceeds the null’s 95th percentile; H3 holds when the real median count lies within the null’s 95% interval. Both hold in every analysis.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 15%">
-<col style="width: 15%">
+<col style="width: 26%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 10%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Slice</th>
 <th style="text-align: right;"><span class="math inline">\(n\)</span></th>
-<th style="text-align: center;">Real median <span class="math inline">\(k\)</span></th>
-<th style="text-align: center;">Null 95% interval (H3)</th>
-<th style="text-align: right;">Real <span class="math inline">\(\Delta\)</span>BIC</th>
-<th style="text-align: right;">Null 95th (H1)</th>
+<th style="text-align: center;">Median <span class="math inline">\(k\)</span></th>
+<th style="text-align: center;">Null 95% (H3)</th>
+<th style="text-align: right;"><span class="math inline">\(\Delta\)</span>BIC</th>
+<th style="text-align: center;">Null 95th (H1)</th>
 </tr>
 </thead>
 <tbody>
@@ -2566,7 +2566,7 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">[4.0, 7.0]</td>
 <td style="text-align: right;">717</td>
-<td style="text-align: right;">488</td>
+<td style="text-align: center;">488</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NEO-120 fac.</td>
@@ -2574,7 +2574,7 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">[3.0, 7.0]</td>
 <td style="text-align: right;">4,013</td>
-<td style="text-align: right;">1,122</td>
+<td style="text-align: center;">1,122</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">IPIP-50 dom.</td>
@@ -2582,7 +2582,7 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <td style="text-align: center;">8</td>
 <td style="text-align: center;">[6.0, 9.0]</td>
 <td style="text-align: right;">1,369</td>
-<td style="text-align: right;">915</td>
+<td style="text-align: center;">915</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">HEXACO dom.</td>
@@ -2590,7 +2590,7 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">[3.5, 7.5]</td>
 <td style="text-align: right;">816</td>
-<td style="text-align: right;">221</td>
+<td style="text-align: center;">221</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HEXACO fac.</td>
@@ -2598,7 +2598,7 @@ Figure 1: The BIC-selected number of mixture components (“types”) across th
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">[1.0, 5.5]</td>
 <td style="text-align: right;">2,701</td>
-<td style="text-align: right;">344</td>
+<td style="text-align: center;">344</td>
 </tr>
 </tbody>
 </table>
@@ -2625,6 +2625,13 @@ Figure 2: CCFI by trait. Each point is the mean of the two preregistered proced
 <p>Both indicators are consistent with continuity (Table 2). The confident-assignment share is below 50% in every dataset, from 10.6% (IPIP-50 domains) to 48.9% (NEO-120 facets). The first-split share exceeds 75% in four of the five datasets, reaching 98.9% in the HEXACO facets; the exception is the fifty-item inventory at 59.4%. Under the selected solutions, most respondents are not assigned to any component with high confidence, and most of the fit improvement is concentrated in a single binary division.</p>
 <p><strong>Table 2.</strong> The BIC-selected mixture solution for each dataset and two preregistered properties of it. Confident assignment: the proportion of respondents with maximum posterior membership probability above .8. First-split share: the proportion of the total BIC gain (selected solution over a single component) contributed by the one-to-two-component division.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 28%">
+<col style="width: 26%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Slice</th>

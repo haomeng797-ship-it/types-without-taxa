@@ -57,12 +57,14 @@ format:
         \setlength{\footnotesep}{13pt}
         \renewcommand{\footnoterule}{\vspace*{4pt}\noindent\rule{2.4in}{0.3pt}\vspace*{7pt}}
         \makeatletter
-        \long\def\@makefntext#1{\setlength{\parindent}{1em}\noindent\hb@xt@1.8em{\hss\@makefnmark\,}\setstretch{1.25}\small #1}
+        \long\def\@makefntext#1{\setlength{\parindent}{0pt}\noindent\hb@xt@1.8em{\hss\@makefnmark\,}\setstretch{1.25}\small #1}
         \makeatother
-        % ---- tables: single-spaced and slightly smaller so they fit the text width ----
+        % ---- tables: single-spaced, smaller, and NO first-line indent inside cells ----
         \usepackage{etoolbox}
-        \AtBeginEnvironment{longtable}{\setstretch{1}\small}
-        \AtBeginEnvironment{tabular}{\setstretch{1}\small}
+        \AtBeginEnvironment{longtable}{\setstretch{1}\footnotesize\setlength{\parindent}{0pt}}
+        \AtBeginEnvironment{tabular}{\setstretch{1}\footnotesize\setlength{\parindent}{0pt}}
+        % ---- references: APA hanging indent (0.5 in) ----
+        \AtBeginDocument{\setlength{\cslhangindent}{0.5in}}
   html:
     theme: cosmo
     toc: true
@@ -412,8 +414,8 @@ The registered ICL arm points the same way. ICL penalizes overlapping components
 
 **Table 1.** Real data compared with the matched null, by analysis. H1 holds when the real clustering gain ($\Delta$BIC of the best mixture over a single component) exceeds the null's 95th percentile; H3 holds when the real median count lies within the null's 95% interval. Both hold in every analysis.
 
-| Slice | $n$ | Real median $k$ | Null 95% interval (H3) | Real $\Delta$BIC | Null 95th (H1) |
-|:--|--:|:--:|:--:|--:|--:|
+| Slice | $n$ | Median $k$ | Null 95% (H3) | $\Delta$BIC | Null 95th (H1) |
+|:------------------|-------:|:--------:|:------------:|-------:|:------------:|
 | NEO-120 dom. | 8,000 | 5 | [4.0, 7.0] | 717 | 488 |
 | NEO-120 fac. | 5,000 | 4 | [3.0, 7.0] | 4,013 | 1,122 |
 | IPIP-50 dom. | 8,000 | 8 | [6.0, 9.0] | 1,369 | 915 |
@@ -439,7 +441,7 @@ Both indicators are consistent with continuity (Table 2). The confident-assignme
 **Table 2.** The BIC-selected mixture solution for each dataset and two preregistered properties of it. Confident assignment: the proportion of respondents with maximum posterior membership probability above .8. First-split share: the proportion of the total BIC gain (selected solution over a single component) contributed by the one-to-two-component division.
 
 | Slice | Model | $k$ | Confident assign. (>.8) | First-split share |
-|:--|:--:|:--:|:--:|:--:|
+|:----------------|:------:|:----:|:------------------:|:----------------:|
 | NEO-120 dom. | VEE | 5 | 16.0% | 90.2% |
 | NEO-120 fac. | VEE | 5 | 48.9% | 88.7% |
 | IPIP-50 dom. | VVE | 8 | 10.6% | 59.4% |
