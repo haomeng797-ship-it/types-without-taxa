@@ -12,8 +12,7 @@ produces as many "types" as the real data, the types were never there.
 
 The point is methodological. Change one routine setting, the covariance assumption, and the number
 of types found slides from one to ten. Held against the matched null and a set of preregistered
-criteria, none of the three instruments shows separated categories. Personality is just where I try
-the test out. The test is the thing I'd want others to pick up and use.
+criteria, none of the three instruments shows separated categories,and the test gives the same verdict whichever clustering engine you plug in. Personality is just where I where I tried the test out. The test is the thing I'd want others to pick up and use.
 
 **Author:** Miura Meng
 
