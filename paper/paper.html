@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Miura Meng">
-<meta name="dcterms.date" content="2026-07-06">
+<meta name="dcterms.date" content="2026-07-07">
 <meta name="keywords" content="mixture models, matched null, multiverse analysis, taxometrics, categorical versus continuous">
 
 <title>Types Without Taxa</title>
@@ -2396,7 +2396,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 6, 2026</p>
+      <p class="date">July 7, 2026</p>
     </div>
   </div>
   
@@ -2505,7 +2505,7 @@ window.Quarto = {
 </section>
 <section id="software" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="software"><span class="header-section-number">3.9</span> Software</h2>
-<p>R 4.5.2 <span class="citation" data-cites="rcoreteam">(<a href="#ref-rcoreteam" role="doc-biblioref">R Core Team, 2024</a>)</span>, with mclust 6.1.2 <span class="citation" data-cites="scrucca2016">(<a href="#ref-scrucca2016" role="doc-biblioref">Scrucca et al., 2016</a>)</span> for the mixtures, RTaxometrics 3.2.1 <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio, 2023</a>)</span> for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout. The procedure is implemented in an R package, matchednull, whose functions, null construction, the count test, and the signature checks, take any data matrix and any clustering routine; it is publicly available, and a release on CRAN is planned. Data, code, and the registration are public.</p>
+<p>R 4.5.2 <span class="citation" data-cites="rcoreteam">(<a href="#ref-rcoreteam" role="doc-biblioref">R Core Team, 2025</a>)</span>, with mclust 6.1.2 <span class="citation" data-cites="scrucca2016">(<a href="#ref-scrucca2016" role="doc-biblioref">Scrucca et al., 2016</a>)</span> for the mixtures, RTaxometrics 3.2.1 <span class="citation" data-cites="ruscio_rtax">(<a href="#ref-ruscio_rtax" role="doc-biblioref">Ruscio, 2023</a>)</span> for the CCFI, and cluster 2.1.8 for the gap statistic; seed 20260620 throughout. The procedure is implemented in an R package, matchednull, whose functions, null construction, the count test, and the signature checks, take any data matrix and any clustering routine; it is publicly available, and a release on CRAN is planned. Data, code, and the registration are public.</p>
 </section>
 </section>
 <section id="results" class="level1" data-number="4">
@@ -2718,7 +2718,7 @@ Figure 3: Positive controls on synthetic data with known structure. Grey band: 
 <p>The workflow does not rely on the count test alone here. A separation large enough to be carried by the margins and covariance is large enough to mark the margins themselves, and the workflow looks there first: in the separation controls, at three standard deviations, at least one trait’s pooled distribution is visibly two-peaked, and the dip test flags it (Hartigan’s, after ties in coarse scales are broken) before the count is read. A separation this size is caught there. That leaves the matched null the case it is built for, groups that differ not in the level of any single trait, and not in the pairwise correlations the null already fixes, but in the dependence beyond them. Such groups leave every trait’s distribution ordinary and show only in that dependence, where the test detects them across the full range of signal in the controls.</p>
 <p>The analysis also illustrates the problem it addresses. Whether the count exceeds the null depends on whether the per-model counts are summarized by their mean or their median, since a few parameterizations at the ten-component ceiling inflate the mean. The count from any single parameterization is bounded above by the grid ceiling, so the per-model counts are right-censored, and the mean of a right-censored batch is pulled by the ceiling rather than describing the bulk of the parameterizations; I preregistered the median for that reason, and report both; the divergence is itself an instance of the analytic flexibility the method is meant to surface, and a concrete reason to fix such a statistic in advance.</p>
 <p>The approach is not specific to personality. Any claim that continuous measurements fall into a given number of groups can be evaluated against a matched null, and reporting the distribution of results across reasonable specifications, rather than a single preferred one, applies wherever a modeling choice is incidental to the question. The matched null also supplies the constructed comparison that earlier critiques of typology research called for but did not provide <span class="citation" data-cites="katahira2020">(<a href="#ref-katahira2020" role="doc-biblioref">Katahira et al., 2020</a>)</span>, for which an independence null is insufficient.</p>
-<p>Several limitations apply. A multiverse analysis is bounded by the choices it spans; I varied the covariance parameterization exhaustively but held the mixture family, the selection criterion, and the indicator resolution fixed, and a broader specification space could be examined. Because the null fixes only linear dependence, a clustering generated by genuinely nonlinear but still continuous structure registers as real without being categorical, which is consistent with the present results and is the behavior the null is intended to produce. The datasets are large but self-selected, drawn from a single item pool, and subsampled for tractability, and the HEXACO hold-out is not naive. Finally, the analysis tests for separated categories and their number, not for the practical utility of a typology; finding no taxa does not establish that a typology is never a useful shorthand, only that it does not correspond to a discovery of discrete kinds.</p>
+<p>Several limitations apply. A multiverse analysis is bounded by the choices it spans; I varied the covariance parameterization exhaustively but held the mixture family, the selection criterion, and the indicator resolution fixed, and a broader specification space could be examined. Because the null fixes only linear dependence, a clustering generated by genuinely nonlinear but still continuous structure registers as real without being categorical, which is consistent with the present results and is the behavior the null is intended to produce. The datasets are large but self-selected, drawn from a single item pool, and subsampled for tractability. HEXACO is the instrument whose count comes closest to the categorical side: its registered median sits at the top of the null interval, and under the ellipsoidal-only summary both HEXACO analyses exceed it. Its taxometric and assignment readings stay dimensional and its hold-out is not naive, so it enters as robustness rather than confirmation. Finally, the analysis tests for separated categories and their number, not for the practical utility of a typology; finding no taxa does not establish that a typology is never a useful shorthand, only that it does not correspond to a discovery of discrete kinds.</p>
 <p>The practical implication is straightforward. A number of clusters is not by itself a finding; it becomes one only when it exceeds what the data’s own margins and covariance produce and is stable across choices, such as the covariance parameterization, that should not affect a substantive conclusion. The test is a fixed workflow that any reported typology can be run through:</p>
 <ol type="1">
 <li>Inspect the margins for pronounced multimodality, the one regime where the null is blind; granular scales are tested after tie-breaking.</li>
@@ -3384,7 +3384,7 @@ McLachlan, G. J. (1987). On bootstrapping the likelihood ratio test statistic fo
 Meehl, P. E. (1995). Bootstraps taxometrics: Solving the classification problem in psychopathology. <em>American Psychologist</em>, <em>50</em>(4), 266–275.
 </div>
 <div id="ref-rcoreteam" class="csl-entry" role="listitem">
-R Core Team. (2024). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing.
+R Core Team. (2025). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
 </div>
 <div id="ref-raftery1995" class="csl-entry" role="listitem">
 Raftery, A. E. (1995). Bayesian model selection in social research. <em>Sociological Methodology</em>, <em>25</em>, 111–163.
@@ -3393,7 +3393,7 @@ Raftery, A. E. (1995). Bayesian model selection in social research. <em>Sociolog
 Robins, R. W., John, O. P., Caspi, A., Moffitt, T. E., &amp; Stouthamer-Loeber, M. (1996). Resilient, overcontrolled, and undercontrolled boys: Three replicable personality types. <em>Journal of Personality and Social Psychology</em>, <em>70</em>(1), 157–171.
 </div>
 <div id="ref-ruscio_rtax" class="csl-entry" role="listitem">
-Ruscio, J. (2023). <em>RTaxometrics: Taxometric analysis</em>.
+Ruscio, J. (2023). <em>RTaxometrics: Taxometric analysis</em> (Version 3.2.1) [Computer software]. <a href="https://CRAN.R-project.org/package=RTaxometrics">https://CRAN.R-project.org/package=RTaxometrics</a>
 </div>
 <div id="ref-ruscio2006" class="csl-entry" role="listitem">
 Ruscio, J., Haslam, N., &amp; Ruscio, A. M. (2006). <em>Introduction to the taxometric method: A practical guide</em>. Lawrence Erlbaum Associates.
