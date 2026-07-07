@@ -2727,7 +2727,7 @@ Figure 3: Positive controls on synthetic data with known structure. Grey band: 
 <li>Compare the real count with the twins’ distribution (H1 and H3).</li>
 <li>Read the categorical signatures of the selected solution: assignment confidence, first-split share, and, where the indicators allow, the CCFI.</li>
 </ol>
-<p>Because the null is defined at the level of the data rather than of any pipeline, a published typology’s own procedure can be run unchanged at step 3. The framework is algorithm-agnostic in principle; the present study demonstrates it with Gaussian mixtures, and validating it under other clustering families is a direct extension. The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.</p>
+<p>Because the null is defined at the level of the data rather than of any pipeline, a published typology’s own procedure can be run unchanged at step 3. The framework is algorithm-agnostic in principle, and the supplement bears this out in practice: run against the same matched null on the same data, k-means with a gap-statistic count returns the same verdict as the Gaussian mixture, the real count within the null for every dataset, even though the two engines report very different raw counts (Table S8). The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.</p>
 </section>
 <section id="conclusion" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
@@ -3328,6 +3328,38 @@ Figure 3: Positive controls on synthetic data with known structure. Grey band: 
 <td style="text-align: center;">9.7</td>
 <td style="text-align: center;">1%</td>
 <td style="text-align: center;">100% (30/30)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table S8.</strong> The count test under a second clustering engine. Because the matched null is defined on the data, any clustering pipeline can be run against it. Each held-out domain dataset was tested with two engines of different paradigm and count rule: a Gaussian mixture (the median selected components over the fourteen covariance models, by BIC; the registered engine) and k-means (the number of clusters chosen by the gap statistic), each compared to its own copula matched null at n = 8,000. Both place the real count within the null for every dataset, though the two engines report very different counts. The Gaussian-mixture column is the registered result (Table 1; 200 null replicates); the k-means column uses 40 null replicates and an independently drawn subsample of the same size, against which the verdict is invariant.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: center;">Gaussian mixture: real (null 95%)</th>
+<th style="text-align: center;">k-means: real (null 95%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NEO-120 dom.</td>
+<td style="text-align: center;">5 ([4.0, 7.0])</td>
+<td style="text-align: center;">1 ([1.0, 2.0])</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IPIP-50 dom.</td>
+<td style="text-align: center;">8 ([6.0, 9.0])</td>
+<td style="text-align: center;">1 ([1.0, 2.0])</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HEXACO dom.</td>
+<td style="text-align: center;">7 ([3.5, 7.5])</td>
+<td style="text-align: center;">1 ([1.0, 2.0])</td>
 </tr>
 </tbody>
 </table>

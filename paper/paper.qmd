@@ -508,7 +508,7 @@ The practical implication is straightforward. A number of clusters is not by its
 4. Compare the real count with the twins' distribution (H1 and H3).
 5. Read the categorical signatures of the selected solution: assignment confidence, first-split share, and, where the indicators allow, the CCFI.
 
-Because the null is defined at the level of the data rather than of any pipeline, a published typology's own procedure can be run unchanged at step 3. The framework is algorithm-agnostic in principle; the present study demonstrates it with Gaussian mixtures, and validating it under other clustering families is a direct extension. The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
+Because the null is defined at the level of the data rather than of any pipeline, a published typology's own procedure can be run unchanged at step 3. The framework is algorithm-agnostic in principle, and the supplement bears this out in practice: run against the same matched null on the same data, k-means with a gap-statistic count returns the same verdict as the Gaussian mixture, the real count within the null for every dataset, even though the two engines report very different raw counts (Table S8). The implementation is public, so that a future claim of N types can be evaluated for whether N reflects the respondents or the analysis.
 
 # Conclusion
 
@@ -611,6 +611,14 @@ The number of types a method reports is not, by itself, a property of the people
 |:--|:--:|:--:|:--:|:--:|:--:|
 | Gaussian, typeless | 0% | 0% | 1.0 | 1% | 0% (0/30) |
 | Skewed margins, typeless | 0% | 100% | 9.7 | 1% | 100% (30/30) |
+
+**Table S8.** The count test under a second clustering engine. Because the matched null is defined on the data, any clustering pipeline can be run against it. Each held-out domain dataset was tested with two engines of different paradigm and count rule: a Gaussian mixture (the median selected components over the fourteen covariance models, by BIC; the registered engine) and k-means (the number of clusters chosen by the gap statistic), each compared to its own copula matched null at n = 8,000. Both place the real count within the null for every dataset, though the two engines report very different counts. The Gaussian-mixture column is the registered result (Table 1; 200 null replicates); the k-means column uses 40 null replicates and an independently drawn subsample of the same size, against which the verdict is invariant.
+
+| Dataset | Gaussian mixture: real (null 95%) | k-means: real (null 95%) |
+|:--|:--:|:--:|
+| NEO-120 dom. | 5 ([4.0, 7.0]) | 1 ([1.0, 2.0]) |
+| IPIP-50 dom. | 8 ([6.0, 9.0]) | 1 ([1.0, 2.0]) |
+| HEXACO dom. | 7 ([3.5, 7.5]) | 1 ([1.0, 2.0]) |
 
 # References {.unnumbered}
 
