@@ -3,13 +3,13 @@
 # The preregistered confirmatory multiverse will run ONLY on the CONFIRM (held-out)
 # rows. Run this ONCE; never edit the seed afterward.
 
-SEED      <- 20260620L     # <-- record this exact number in the preregistration
+# Record this seed in the preregistration.
 CONF_FRAC <- 0.50          # fraction held out for confirmation (large N -> generous)
 
 OUT  <- "data/scored"   # directory with the scored .npy arrays (domain_scores.npy, ipip50_scores.npy, hexaco_scores.npy); see data/SOURCES.md
 DEST <- "prereg"        # hold-out manifests are written here
 
-# read only the .npy header to get the row count (no array load)
+# Read only the NumPy header to obtain the row count.
 npy_nrow <- function(path){
   con <- file(path, "rb"); on.exit(close(con))
   readBin(con, "raw", 8)                                   # magic + version
