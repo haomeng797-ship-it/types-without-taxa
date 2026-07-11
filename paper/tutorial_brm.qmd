@@ -130,7 +130,7 @@ are each variable's distribution and the correlations among variables; the thing
 everything beyond them, which is where latent groups live. The matchednull package implements
 this construction, the count test around it, and the follow-up checks that separate "more
 structure than the null" from "categories of people." The package is available on GitHub at
-<https://github.com/haomeng797-ship-it/matchednull>, with a CRAN release planned.
+<https://github.com/haomeng797-ship-it/matchednull> and has been submitted to CRAN.
 
 # The idea: a null twin
 
