@@ -1,6 +1,6 @@
 ---
 title: "A Matched-Null Test of Whether the Clusters a Pipeline Reports Are Real, With an Application to Personality Types"
-author: "Miura Meng"
+author: "Miura Meng — Graduate School of Education, University of Pennsylvania"
 date: today
 abstract: |
   A clustering algorithm applied to continuous data will report some number of clusters, or
@@ -29,6 +29,8 @@ keywords:
 bibliography: references.bib
 csl: apa.csl
 format:
+  docx:
+    reference-doc: apa_reference.docx
   pdf:
     pdf-engine: xelatex
     documentclass: article
@@ -79,6 +81,10 @@ execute:
 ```{=latex}
 \newpage
 ```
+
+::: {.content-visible when-format="docx"}
+*Correspondence concerning this article should be addressed to Miura Meng, Graduate School of Education, University of Pennsylvania, Philadelphia, PA 19104, United States. Email: meng10@upenn.edu*
+:::
 
 # The problem
 
@@ -211,7 +217,8 @@ p \;=\; \frac{1 + \sum_{r=1}^{R} \mathbb{1}\!\left\{ T(\mathbf{X}^{\ast}_r) \geq
 $$
 
 and the interval verdict reads $T(\mathbf{X})$ against the $[.025,\,.975]$ quantiles of the
-null draws. The construction is exact in the margins, and the correlations are reproduced up
+null draws; throughout, "exceeds the null" means $T(\mathbf{X})$ above the .975 quantile, the
+upper end of that interval. The construction is exact in the margins, and the correlations are reproduced up
 to the sampling error of the rank map; both conventions, the added-one Monte Carlo p and the
 quantile interval, follow standard surrogate-data practice [@theiler1992].
 
@@ -284,6 +291,20 @@ no more clusters in the real data than in its twins, because the data, though co
 a single population, and everything the pipeline could see was carried by the margins and
 correlations.
 
+For adapting the call beyond the example, the full signature is
+`matched_null_test(x, cluster_fn, R = 200, probs = c(.025, .975), ridge = 1e-6)`. `x` is a
+numeric matrix or data frame with complete cases: remove or impute missing values first, since
+the twin is built from the observed values and the correlation matrix, and neither is defined
+under NA. `cluster_fn` is the pipeline function, the second argument above; it may return any
+scalar summary of clustering strength, not only a selected count. `R` is the number of twins;
+`probs` sets the quantiles of the interval verdict, so a stricter or looser read than 95
+percent is one argument away; `ridge` is a small diagonal added when the correlation matrix is
+not positive definite. The returned object is a list of class `"matched_null_test"` whose
+components are directly usable in code, not only in the printed summary: `$real` (the statistic
+on the real data), `$null` (all `R` null draws), `$interval`, `$p_exceed`, and `$within`. The
+pipeline is run exactly as supplied: an error raised inside `cluster_fn` on some twin
+propagates rather than being skipped, so a fragile pipeline should catch its own exceptions.
+
 ## A detection, for contrast
 
 To see the test fire, hide two genuine groups where the null cannot reach them. The two
@@ -294,14 +315,14 @@ the grouping; it lives entirely in the dependence.
 ```r
 set.seed(42)
 z <- sample(2, 400, replace = TRUE)
-X <- matrix(rnorm(400 * 4), 400, 4)
+x_types <- matrix(rnorm(400 * 4), 400, 4)
 L1 <- chol(matrix(c(1,  .85,  .85, 1), 2, 2))
 L2 <- chol(matrix(c(1, -.85, -.85, 1), 2, 2))
-X[z == 1, 1:2] <- X[z == 1, 1:2] %*% L1; X[z == 1, 3:4] <- X[z == 1, 3:4] %*% L1
-X[z == 2, 1:2] <- X[z == 2, 1:2] %*% L2; X[z == 2, 3:4] <- X[z == 2, 3:4] %*% L2
+x_types[z == 1, 1:2] <- x_types[z == 1, 1:2] %*% L1; x_types[z == 1, 3:4] <- x_types[z == 1, 3:4] %*% L1
+x_types[z == 2, 1:2] <- x_types[z == 2, 1:2] %*% L2; x_types[z == 2, 3:4] <- x_types[z == 2, 3:4] %*% L2
 
 set.seed(20260620)
-matched_null_test(X, pick_k, R = 200)
+matched_null_test(x_types, pick_k, R = 200)
 #> Matched-null test (200 null twins)
 #>   real statistic:      2
 #>   null interval:       [1, 1]
@@ -401,6 +422,8 @@ the correlation matrix of real personality data, and one hundred more with the s
 copula but skewed margins (chi-square, beta, and squared-uniform transforms). No types exist in
 either set.
 
+**Table 1.** False-positive calibration on typeless data (100 datasets per row). The test fires when the real fourteen-model median exceeds the nulls' 97.5th percentile, the upper end of the 95% interval. Table S5 reports the full calibration ladder, adding the gap statistic and the non-Gaussian-dependence scenarios.
+
 | Scenario (typeless) | Matched-null test fired | BIC selects k > 1 | Mean BIC k | bLRT selects k > 1 |
 |:--|:--:|:--:|:--:|:--:|
 | Gaussian margins | 0% | 0% | 1.0 | 0% |
@@ -454,36 +477,36 @@ respondents moves the answer across nearly the entire reportable range.
 ![The BIC-selected number of mixture components ("types") across the fourteen covariance parameterizations, on held-out data at the matched sample size. Each point is one parameterization, colored and shaped by covariance family and sorted by selected count. The grey band marks the 95% interval of the matched-null median count; the dashed line is the real median. A real median inside the band indicates a typical count indistinguishable from data with no latent types.](../figures/fig1_spec_curve_null_median.png){#fig-spec width=95%}
 
 **Step 4, the count against the null.** In all five analyses the real median falls within the
-null's 95 percent interval (Table 1). In the NEO-120 domains the real median is five components
+null's 95 percent interval (Table 2). In the NEO-120 domains the real median is five components
 against a null interval of [4.0, 7.0]; the same holds everywhere (one-sided Monte Carlo p from
 .11 to .80). The data do carry structure the twin cannot reproduce: the BIC improvement of the
-best mixture over one component exceeds the null's 95th percentile in every dataset (Table 1,
+best mixture over one component exceeds the null's 95th percentile in every dataset (Table 2,
 $\Delta$BIC). But that improvement certifies only non-Gaussianity, skew or mild nonlinearity or
 uneven density, and it does not raise the number of types above what a typeless population
 yields under the identical procedure.
 
-**Table 1.** Real data compared with the matched null, by analysis. The clustering gain
+**Table 2.** Real data compared with the matched null, by analysis. The clustering gain
 ($\Delta$BIC of the best mixture over a single component) exceeds the null's 95th percentile in
 every analysis, so real structure beyond the linear dependence is present; the median count
 lies within the null's 95% interval in every analysis, so that structure does not raise the
 number of types.
 
-| Slice | $n$ | Median $k$ | Null 95% | $\Delta$BIC | Null 95th |
-|:------------------|-------:|:--------:|:------------:|-------:|:------------:|
-| NEO-120 dom. | 8,000 | 5 | [4.0, 7.0] | 717 | 488 |
-| NEO-120 fac. | 5,000 | 4 | [3.0, 7.0] | 4,013 | 1,122 |
-| IPIP-50 dom. | 8,000 | 8 | [6.0, 9.0] | 1,369 | 915 |
-| HEXACO dom. | 8,000 | 7 | [3.5, 7.5] | 816 | 221 |
-| HEXACO fac. | 5,000 | 4 | [1.0, 5.5] | 2,701 | 344 |
+| Slice | $n$ | Median $k$ | Null 95% | One-sided $p$ | $\Delta$BIC | Null 95th |
+|:------------------|-------:|:--------:|:------------:|:----:|-------:|:------------:|
+| NEO-120 dom. | 8,000 | 5 | [4.0, 7.0] | .78 | 717 | 488 |
+| NEO-120 fac. | 5,000 | 4 | [3.0, 7.0] | .80 | 4,013 | 1,122 |
+| IPIP-50 dom. | 8,000 | 8 | [6.0, 9.0] | .40 | 1,369 | 915 |
+| HEXACO dom. | 8,000 | 7 | [3.5, 7.5] | .11 | 816 | 221 |
+| HEXACO fac. | 5,000 | 4 | [1.0, 5.5] | .34 | 2,701 | 344 |
 
 **Step 5, categorical signatures.** None appears. No trait's taxometric index reaches the
 categorical threshold (mean CCFI .375 across NEO-120 traits, .430 across HEXACO; highest single
-trait .535, in the ambiguous band; Table S2). Under the selected solutions, fewer than half of
+trait .535, in the ambiguous band; @fig-ccfi; Table S2). Under the selected solutions, fewer than half of
 respondents in every dataset are assigned to any component with posterior confidence above .8,
-and most of the fit improvement is concentrated in the first binary split (Table 2), the
+and most of the fit improvement is concentrated in the first binary split (Table 3), the
 signature of a partitioned continuum rather than of separable groups.
 
-**Table 2.** The BIC-selected mixture solution for each dataset and two properties of it.
+**Table 3.** The BIC-selected mixture solution for each dataset and two properties of it. The solution shown is the single parameterization with the highest BIC over the fourteen-model grid; its $k$ is a property of that one model and need not equal the cross-grid median count of Table 2.
 Confident assignment: the proportion of respondents with maximum posterior membership
 probability above .8. First-split share: the proportion of the total BIC gain contributed by
 the one-to-two-component division.
@@ -514,8 +537,9 @@ Suppose two groups differ only in their average levels, far enough apart that th
 shows in the histograms and the correlations. The null preserves both, so its twins reproduce
 the same partition, and the count test goes quiet: the three-standard-deviation case in
 @fig-pc. The reason is a fact about the data rather than a defect of the test. From margins
-and correlations alone, two well-separated groups and one skewed continuum are the same object;
-the information that would separate those descriptions is not present in the first two moments.
+and correlations alone, two well-separated groups and a single unclustered population with the
+same bimodal margins are the same object; the information that would separate those
+descriptions is not present in the margins and correlations.
 A method that reports the separated pair anyway is supplying the missing information by
 assumption, and the calibration shows what that assumption costs: committed to Gaussian
 components, the bootstrap likelihood-ratio test renders a skewed single group as several, in
@@ -596,7 +620,7 @@ the software, and wrote the manuscript.
 
 # Supplementary tables {.unnumbered}
 
-**Table S1.** The number of components BIC selected under each of the fourteen mclust covariance parameterizations, at the matched sample size (8,000 cases for domain analyses, 5,000 for facet analyses). The median of each column is the count statistic reported in Table 1.
+**Table S1.** The number of components BIC selected under each of the fourteen mclust covariance parameterizations, at the matched sample size (8,000 cases for domain analyses, 5,000 for facet analyses). The median of each column is the count statistic reported in Table 2.
 
 | Model | NEO-120 dom. | NEO-120 fac. | IPIP-50 dom. | HEXACO dom. | HEXACO fac. |
 |:--|:--:|:--:|:--:|:--:|:--:|
@@ -616,7 +640,7 @@ the software, and wrote the manuscript.
 | VVV | 2 | 2 | 6 | 2 | 2 |
 | **Median** | **5** | **4** | **8** | **7** | **4** |
 
-**Table S2.** Comparison Curve Fit Index for each trait under MAMBAC and MAXEIG, their mean (the statistic plotted in Figure 2), and the supplementary L-Mode curve. Values below .45 indicate dimensional structure, above .55 categorical, ambiguous between.
+**Table S2.** Comparison Curve Fit Index for each trait under MAMBAC and MAXEIG, their mean (the statistic plotted in @fig-ccfi), and the supplementary L-Mode curve. Values below .45 indicate dimensional structure, above .55 categorical, ambiguous between. The L-Mode curve is supplementary rather than preregistered (the registered statistic is the MAMBAC-MAXEIG mean); it slightly exceeds .55 for one trait (Emotionality, .559) without changing any registered verdict.
 
 | Trait | MAMBAC | MAXEIG | Mean | L-Mode |
 |:--|:--:|:--:|:--:|:--:|
@@ -640,7 +664,7 @@ the software, and wrote the manuscript.
 | IPIP-50 dom. | 8 ([6.0, 9.0]) | 1 ([1.0, 2.0]) |
 | HEXACO dom. | 7 ([3.5, 7.5]) | 1 ([1.0, 2.0]) |
 
-**Table S4.** Power of the count test as irrelevant dimensions are added. Data as in the dependence regime of Figure 3: two components with identical standard-normal margins whose within-pair correlations (dimensions 1-4 only) differ in sign by 2*rho*; dimensions 5 through *p* are independent noise. n = 4,000; 40 null replicates per cell; the entry is the real median count against the null's 95% interval, with detection marked \*.
+**Table S4.** Power of the count test as irrelevant dimensions are added. Data as in the dependence regime of @fig-pc: two components with identical standard-normal margins whose within-pair correlations (dimensions 1-4 only) differ in sign by 2*rho*; dimensions 5 through *p* are independent noise. n = 4,000; 40 null replicates per cell; the entry is the real median count against the null's 95% interval, with detection marked \*.
 
 | | rho = 0 | .30 | .50 | .70 | .85 |
 |:--|:--:|:--:|:--:|:--:|:--:|
