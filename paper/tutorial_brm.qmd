@@ -608,11 +608,12 @@ next such claim, from any pipeline, can be given the same afternoon of scrutiny.
 
 All materials are public. The analysis code, the three public datasets' sources, and the
 rendered manuscript are available at <https://github.com/haomeng797-ship-it/types-without-taxa>;
-the matchednull package is available at <https://github.com/haomeng797-ship-it/matchednull>,
-with a CRAN release planned; a DOI-archived copy of the code and package is deposited at [OSF/Zenodo DOI
-to be minted at submission]. The confirmatory analysis of the worked example, its decision
-rule, and its specification grid were preregistered on the Open Science Framework before the
-held-out data were opened (<https://osf.io/2ekcg>; analysis seed 20260620). The simulations
+the matchednull package is available at <https://github.com/haomeng797-ship-it/matchednull>
+and has been submitted to CRAN. The confirmatory analysis of the worked example, its decision
+rule, its specification grid, and the analysis code were preregistered and archived on the
+Open Science Framework before the held-out data were opened, as a frozen, time-stamped
+registration with a persistent identifier
+(<https://doi.org/10.17605/OSF.IO/2EKCG>; analysis seed 20260620). The simulations
 reported in the validation and practical-guidance sections were not preregistered.
 
 # Declarations {.unnumbered}
