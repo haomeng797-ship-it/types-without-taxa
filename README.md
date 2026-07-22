@@ -1,6 +1,6 @@
 # Types Without Taxa
 
-### A Covariance-Matched-Null Multiverse Test of Categorical versus Continuous Personality Structure
+### A Matched-Null Test of Whether the Clusters a Pipeline Reports Are Real, With an Application to Personality Types
 *Do the "personality types" that clustering algorithms report reflect real categories of people, or are they artifacts of the analysis?*
 
 A preregistered reanalysis, in R, of three large public personality datasets (~1.0M respondents).
@@ -12,19 +12,22 @@ produces as many "types" as the real data, the types were never there.
 
 The point is methodological. Change one routine setting, the covariance assumption, and the number
 of types found slides from one to ten. Held against the matched null and a set of preregistered
-criteria, none of the three instruments shows separated categories,and the test gives the same verdict whichever clustering engine you plug in. Personality is just where I where I tried the test out. The test is the thing I'd want others to pick up and use.
+criteria, none of the three instruments shows separated categories, and the test gives the same verdict whichever clustering engine you plug in. Personality is just where I tried the test out. The test is the thing I'd want others to pick up
+and use: it ships as an R package, [matchednull](https://CRAN.R-project.org/package=matchednull),
+now on CRAN. The tutorial manuscript is under review at Behavior Research Methods.
 
 **Author:** Miura Meng
 
 ## Read it
+- Manuscript (under review at Behavior Research Methods): [`paper/tutorial_brm.pdf`](paper/tutorial_brm.pdf) (Quarto source `tutorial_brm.qmd`)
+- R package: https://CRAN.R-project.org/package=matchednull
 - Preregistration (OSF): https://osf.io/2ekcg
-- Paper: [`paper/paper.pdf`](paper/paper.pdf) (Quarto source `paper.qmd`, also `paper.html`).
 
 ## What's here
 
 | Path | Contents |
 |---|---|
-| `R/` | analysis scripts `00`–`08`, run in order |
+| `R/` | analysis scripts `00`–`08`, run in order; `15`–`17` are the supplementary simulations (engine check, dimension sweep, t-copula calibration) |
 | `prereg/` | the preregistered decision rule, specification grid, knowledge-of-data, and the sealed hold-out indices |
 | `figures/` | the figures |
 | `paper/` | the manuscript: Quarto source, plus rendered PDF and HTML |
