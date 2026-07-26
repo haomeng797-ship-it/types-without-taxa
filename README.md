@@ -1,5 +1,7 @@
 # Types Without Taxa
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21610660.svg)](https://doi.org/10.5281/zenodo.21610660)
+
 ### A Matched-Null Test of Whether the Clusters a Pipeline Reports Are Real, With an Application to Personality Types
 *Do the "personality types" that clustering algorithms report reflect real categories of people, or are they artifacts of the analysis?*
 
