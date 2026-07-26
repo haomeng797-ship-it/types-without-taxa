@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+title: >-
+  Types Without Taxa: analysis code for a matched-null test of whether the
+  clusters a pipeline reports are real
+message: "If you use this code, please cite the accompanying paper and this archive."
+type: software
+authors:
+  - given-names: Miura
+    family-names: Meng
+    email: meng10@upenn.edu
+    orcid: "https://orcid.org/0009-0004-1522-1997"
+    affiliation: "University of Pennsylvania"
+repository-code: "https://github.com/haomeng797-ship-it/types-without-taxa"
+abstract: >-
+  Analysis code and preregistered materials for a matched-null test of
+  cluster-count claims, applied to three large public personality datasets.
+  A synthetic null population is built to share the real data's marginal
+  distributions and full correlation structure while containing no latent types
+  by construction; the number of clusters a pipeline reports on the real data is
+  then compared with what the same pipeline reports on the null. Includes the
+  specification curve across all fourteen mclust covariance parameterizations,
+  positive controls, taxometric analyses, and the figures reported in the paper.
+keywords:
+  - clustering
+  - copula
+  - null model
+  - mixture models
+  - personality
+  - psychometrics
+  - taxometrics
+  - preregistration
+  - R
+license: MIT
+identifiers:
+  - type: doi
+    value: "10.17605/OSF.IO/2EKCG"
+    description: "Preregistration and archived materials on OSF"
+references:
+  - type: article
+    title: >-
+      Types Without Taxa: A Covariance-Matched-Null Multiverse Test of
+      Categorical versus Continuous Personality Structure
+    authors:
+      - given-names: Miura
+        family-names: Meng
+        orcid: "https://orcid.org/0009-0004-1522-1997"
+    year: 2026
+    notes: "Manuscript under review."
+  - type: software
+    title: "matchednull: Matched-Null Tests for Cluster-Count Claims"
+    authors:
+      - given-names: Miura
+        family-names: Meng
+        orcid: "https://orcid.org/0009-0004-1522-1997"
+    doi: "10.5281/zenodo.21610608"
+    notes: "The method implemented as an R package on CRAN."
