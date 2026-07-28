@@ -16,12 +16,13 @@ The point is methodological. Change one routine setting, the covariance assumpti
 of types found slides from one to ten. Held against the matched null and a set of preregistered
 criteria, none of the three instruments shows separated categories, and the test gives the same verdict whichever clustering engine you plug in. Personality is just where I tried the test out. The test is the thing I'd want others to pick up
 and use: it ships as an R package, [matchednull](https://CRAN.R-project.org/package=matchednull),
-now on CRAN. The tutorial manuscript is under review at Behavior Research Methods.
+now on CRAN. The manuscript is under review at Behavior Research Methods.
 
 **Author:** Miura Meng
 
 ## Read it
-- Manuscript (under review at Behavior Research Methods): [`paper/tutorial_brm.pdf`](paper/tutorial_brm.pdf) (Quarto source `tutorial_brm.qmd`)
+- [Read the paper (web)](https://haomeng797-ship-it.github.io/types-without-taxa/paper/tutorial_brm.html)
+- [The paper as a formatted PDF](https://haomeng797-ship-it.github.io/types-without-taxa/paper/tutorial_brm.pdf)
 - R package: https://CRAN.R-project.org/package=matchednull
 - Preregistration (OSF): https://osf.io/2ekcg
 

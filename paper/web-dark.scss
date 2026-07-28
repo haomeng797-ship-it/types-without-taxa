@@ -1,0 +1,139 @@
+/*-- scss:defaults --*/
+
+// GitHub's dark palette, so the page reads as night sky rather than grey card
+// stock. Loaded after darkly, whose defaults these replace.
+$gh-canvas:        #0d1117;
+$gh-canvas-subtle: #161b22;
+$gh-canvas-inset:  #010409;
+$gh-border:        #30363d;
+$gh-fg:            #c9d1d9;
+$gh-fg-muted:      #8b949e;
+$gh-accent:        #58a6ff;
+$gh-accent-hover:  #79c0ff;
+$gh-danger:        #ff7b72;
+
+$body-bg:    $gh-canvas;
+$body-color: $gh-fg;
+
+$link-color:       $gh-accent;
+$link-hover-color: $gh-accent-hover;
+
+$border-color: $gh-border;
+$hr-color:     $gh-border;
+
+$code-color:             $gh-danger;
+$code-bg:                $gh-canvas-subtle;
+$code-block-bg:          $gh-canvas-subtle;
+$code-block-border-left: $gh-border;
+
+$table-border-color: $gh-border;
+$table-color:        $gh-fg;
+
+$navbar-bg:  $gh-canvas;
+$sidebar-bg: $gh-canvas;
+$toc-color:  $gh-fg-muted;
+
+$headings-color: #e6edf3;
+
+/*-- scss:rules --*/
+
+body.quarto-dark {
+  background-color: $gh-canvas;
+  color: $gh-fg;
+}
+
+body.quarto-dark h1,
+body.quarto-dark h2,
+body.quarto-dark h3,
+body.quarto-dark h4 {
+  color: #e6edf3;
+}
+
+// Section numbers sit quieter than the heading text they precede.
+body.quarto-dark .header-section-number {
+  color: $gh-fg-muted;
+}
+
+body.quarto-dark a {
+  color: $gh-accent;
+}
+
+body.quarto-dark a:hover {
+  color: $gh-accent-hover;
+}
+
+// Contents rail.
+body.quarto-dark #TOC,
+body.quarto-dark #quarto-sidebar-toc-left,
+body.quarto-dark .sidebar {
+  background-color: $gh-canvas;
+}
+
+body.quarto-dark #TOC .nav-link {
+  color: $gh-fg-muted;
+}
+
+body.quarto-dark #TOC .nav-link:hover,
+body.quarto-dark #TOC .nav-link.active {
+  color: $gh-accent;
+}
+
+// Code and tables take the subtle canvas, the way GitHub renders them.
+body.quarto-dark pre,
+body.quarto-dark pre.sourceCode,
+body.quarto-dark div.sourceCode {
+  background-color: $gh-canvas-subtle;
+  border: 1px solid $gh-border;
+  border-radius: 6px;
+}
+
+body.quarto-dark code {
+  color: $gh-danger;
+  background-color: rgba(110, 118, 129, 0.28);
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+}
+
+body.quarto-dark pre code {
+  background: none;
+  padding: 0;
+}
+
+body.quarto-dark table,
+body.quarto-dark .table {
+  color: $gh-fg;
+  border-color: $gh-border;
+}
+
+body.quarto-dark .table > :not(caption) > * > * {
+  border-color: $gh-border;
+  background-color: transparent;
+}
+
+body.quarto-dark caption,
+body.quarto-dark figcaption,
+body.quarto-dark .quarto-float-caption {
+  color: $gh-fg-muted;
+}
+
+body.quarto-dark blockquote {
+  color: $gh-fg-muted;
+  border-left: 0.25em solid $gh-border;
+  padding-left: 1em;
+}
+
+body.quarto-dark hr {
+  border-color: $gh-border;
+  opacity: 1;
+}
+
+// The three figures are the ones submitted with the manuscript and keep their
+// white plot background. Against a canvas this dark the white needs pulling
+// down further than it did against grey; brightness() scales all channels
+// together, so the red points and the grey null band keep their hues.
+body.quarto-dark img.figure-img {
+  background: #d0d7de;
+  border: 1px solid $gh-border;
+  filter: brightness(0.82);
+  box-shadow: 0 1px 6px rgba(1, 4, 9, 0.6);
+}

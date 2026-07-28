@@ -66,7 +66,14 @@ format:
         \AtBeginEnvironment{tabular}{\setstretch{1}\footnotesize\setlength{\parindent}{0pt}}
         \AtBeginDocument{\setlength{\cslhangindent}{0.5in}}
   html:
-    theme: cosmo
+    author: "Miura Meng"
+    date: "2026-07-11"
+    date-format: "MMMM D, YYYY"
+    language:
+      title-block-published: "Submitted"
+    theme:
+      light: [cosmo, web.scss]
+      dark: [darkly, web.scss, web-dark.scss]
     toc: true
     toc-depth: 2
     toc-location: left
@@ -78,7 +85,9 @@ execute:
   echo: false
 ---
 
+::: {.content-hidden when-format="html"}
 *Keywords:* cluster analysis, matched null, mixture models, taxometrics, R package
+:::
 
 ```{=latex}
 \newpage

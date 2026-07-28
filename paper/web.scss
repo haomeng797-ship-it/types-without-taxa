@@ -1,0 +1,80 @@
+/*-- scss:defaults --*/
+
+// Reading measure and rhythm for a long methods paper.
+$font-size-root:  17px !default;
+$line-height-base: 1.65 !default;
+$toc-font-size:   0.86rem !default;
+
+/*-- scss:rules --*/
+
+// Keep the body text at a comfortable measure. Full-width prose on a wide
+// monitor is the single biggest thing that makes a rendered manuscript
+// unpleasant to read.
+main.content {
+  max-width: 46rem;
+}
+
+p {
+  text-align: left;
+  hyphens: none;
+}
+
+// Figures. The three figures are the ones submitted with the manuscript, so
+// they keep their white plot background rather than being redrawn for the web.
+// In dark mode that white is harsh, so the figure sits on a card and is dimmed
+// uniformly: brightness() scales all three channels together, which darkens
+// the background without shifting any hue, so the red points stay red and the
+// grey null band stays grey.
+figure.figure {
+  margin-block: 2.25rem;
+}
+
+img.figure-img {
+  border-radius: 6px;
+}
+
+figcaption,
+.figure-caption {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  text-align: left;
+  max-width: 42rem;
+  margin-inline: auto;
+  padding-top: 0.6rem;
+}
+
+[data-bs-theme="dark"] img.figure-img,
+body.quarto-dark img.figure-img {
+  background: #e9ecef;
+  padding: 0.6rem;
+  filter: brightness(0.88);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+// Numbered contents, so short and wrapped headings stay distinguishable.
+#TOC .nav-link {
+  padding-block: 0.22rem;
+}
+
+// Tables read as data, not as page furniture.
+table {
+  font-size: 0.9rem;
+}
+
+caption,
+.table > caption {
+  caption-side: top;
+  font-size: 0.88rem;
+  padding-bottom: 0.5rem;
+}
+
+// The abstract carries the argument; give it a little standing.
+.abstract {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+// References: hanging indent, as in the manuscript.
+#refs div.csl-entry {
+  margin-bottom: 0.85rem;
+}
