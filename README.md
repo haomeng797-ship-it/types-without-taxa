@@ -16,7 +16,7 @@ The point is methodological. Change one routine setting, the covariance assumpti
 of types found slides from one to ten. Held against the matched null and a set of preregistered
 criteria, none of the three instruments shows separated categories, and the test gives the same verdict whichever clustering engine you plug in. Personality is just where I tried the test out. The test is the thing I'd want others to pick up
 and use: it ships as an R package, [matchednull](https://CRAN.R-project.org/package=matchednull),
-now on CRAN. The manuscript is under review at Behavior Research Methods.
+now on CRAN. The manuscript received a revise-and-resubmit decision from Behavior Research Methods.
 
 **Author:** Miura Meng
 
