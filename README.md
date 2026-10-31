@@ -9,8 +9,9 @@ A preregistered reanalysis, in R, of three large public personality datasets (~1
 When you run a clustering algorithm on personality data it almost always returns some number of
 "types," whether or not real types exist. This study asks how to tell the difference, and answers
 it with a matched null: a synthetic population built to share the real data's trait distributions
-and its full correlation structure, but with no latent types by construction. If a typeless null
-produces as many "types" as the real data, the types were never there.
+and, approximately, its correlation structure, but with no latent types by construction. If a typeless
+reference produces as many "types" as the real data, the data alone do not support a typology; if the
+real data produce more, the test says so.
 
 The point is methodological. Change one routine setting, the covariance assumption, and the number
 of types found slides from one to ten. Held against the matched null and a set of preregistered
@@ -40,7 +41,7 @@ now on CRAN. The manuscript received a revise-and-resubmit decision from Behavio
 Each dataset is modeled as a Gaussian mixture; "types" are the components selected by BIC across
 mclust's fourteen covariance parameterizations. To ask whether an apparent clustering exceeds what
 the data's own margins and covariance produce, each dataset is compared to a Gaussian-copula matched
-null that fixes every univariate marginal and the full covariance and randomizes only the
+null that fixes every univariate marginal, approximately matches the covariance, and randomizes only the
 higher-order dependence. A taxometric analysis (CCFI) provides an independent categorical-versus-
 continuous test. A decision rule, fixed before the held-out data were opened, declares the structure
 continuous only if all four preregistered criteria hold. See [`prereg/decision_rule.md`](prereg/decision_rule.md).
@@ -82,8 +83,6 @@ If you use this material, please cite the registration:
 
 > Miura Meng. (2026). *Types Without Taxa: A Covariance-Matched-Null Multiverse Test of Categorical
 > versus Continuous Personality Structure.* OSF. https://osf.io/2ekcg
-
-(Manuscript in preparation.)
 
 ## License
 Code is released under the MIT License (see [`LICENSE`](LICENSE)). The data are not covered by that
