@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Types Without Taxa: analysis code for a matched-null test of whether the
-  clusters a pipeline reports are real
+  Types Without Taxa: analysis code for a matched-null test of whether a
+  reported cluster count exceeds its reference model
 message: "If you use this code, please cite the accompanying paper and this archive."
 type: software
 authors:
@@ -15,7 +15,7 @@ abstract: >-
   Analysis code and preregistered materials for a matched-null test of
   cluster-count claims, applied to three large public personality datasets.
   A synthetic null population is built to share the real data's marginal
-  distributions and full correlation structure while containing no latent types
+  distributions and, approximately, its correlation structure while containing no latent types
   by construction; the number of clusters a pipeline reports on the real data is
   then compared with what the same pipeline reports on the null. Includes the
   specification curve across all fourteen mclust covariance parameterizations,
@@ -39,13 +39,13 @@ identifiers:
 references:
   - type: article
     title: >-
-      A Matched-Null Test of Whether the Clusters a Pipeline Reports Are Real, With an Application to Personality Types
+      A Matched-Null Test of Whether a Reported Cluster Count Exceeds Its Reference Model, With an Application to Personality Types
     authors:
       - given-names: Miura
         family-names: Meng
         orcid: "https://orcid.org/0009-0004-1522-1997"
     year: 2026
-    notes: "Manuscript under review."
+    notes: "Revise-and-resubmit, Behavior Research Methods."
   - type: software
     title: "matchednull: Matched-Null Tests for Cluster-Count Claims"
     authors:
